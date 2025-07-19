@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <title>klaOS Game Store</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #f5f7fa;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #333;
+    }
+
+    .container {
+      max-width: 980px;
+      margin: 0 auto;
+      background-color: #fff;
+      border-left: 1px solid #ddd;
+      border-right: 1px solid #ddd;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      border-radius: 8px;
+    }
+
+    header {
+      background-color: #ffffff;
+      padding: 20px 30px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid #e0e0e0;
+      border-radius: 8px 8px 0 0;
+    }
+
+    header img {
+      height: 50px;
+      filter: drop-shadow(0 1px 1px rgba(0,0,0,0.1));
+    }
+
+    header div {
+      font-weight: 700;
+      font-size: 1.5rem;
+      color: #007acc;
+      letter-spacing: 1px;
+    }
+
+    nav {
+      background-color: #fafafa;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 30px;
+      border-bottom: 1px solid #e0e0e0;
+      flex-wrap: wrap;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 12px;
+    }
+
+    nav a {
+      color: #007acc;
+      text-decoration: none;
+      padding: 8px 18px;
+      font-weight: 600;
+      border-radius: 6px;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      user-select: none;
+    }
+
+    nav a:hover {
+      background-color: #007acc;
+      color: #fff;
+      box-shadow: 0 2px 8px rgba(0, 122, 204, 0.3);
+    }
+
+    .search-box {
+      display: flex;
+      border-radius: 6px;
+      overflow: hidden;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+    }
+
+    .search-box input {
+      padding: 8px 12px;
+      border: none;
+      outline: none;
+      font-size: 1rem;
+      width: 200px;
+      color: #333;
+    }
+
+    .search-box button {
+      padding: 8px 16px;
+      background-color: #007acc;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      font-weight: 600;
+      transition: background-color 0.3s ease;
+    }
+
+    .search-box button:hover {
+      background-color: #005f99;
+    }
+
+    /* Botões personalizados */
+    .button {
+      background-color: #007acc;
+      color: #fff;
+      border: none;
+      padding: 10px 18px;
+      margin-top: 10px;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    .button:hover {
+      background-color: #005f99;
+      transform: scale(1.03);
+    }
+
+    /* Banner dinâmico */
+    .banner {
+      display: flex;
+      align-items: center;
+      gap: 30px;
+      background: linear-gradient(90deg, #007acc, #005f99);
+      padding: 25px 30px;
+      color: #fff;
+      border-radius: 0 0 8px 8px;
+      user-select: none;
+      overflow: hidden;
+    }
+
+    .banner img {
+      max-height: 140px;
+      width: auto;
+      border-radius: 12px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.5);
+      flex-shrink: 0;
+      opacity: 1;
+      transition: opacity 0.8s ease;
+      object-fit: contain;
+      background-color: #00000020;
+    }
+
+    .banner-info {
+      max-width: 600px;
+      opacity: 1;
+      transition: opacity 0.8s ease;
+    }
+
+    .banner-info h1 {
+      margin: 0 0 8px;
+      font-size: 2rem;
+      text-shadow: 0 1px 6px rgba(0,0,0,0.5);
+    }
+
+    .banner-info p {
+      margin: 0;
+      font-size: 1.1rem;
+      font-weight: 500;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+    }
+
+    .content {
+      display: flex;
+      padding: 30px;
+      gap: 30px;
+      color: #333;
+    }
+
+    .main {
+      flex: 3;
+    }
+
+    .sidebar {
+      flex: 1;
+      background-color: #007af5;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 1px 6px rgba(0,0,0,0.1);
+      border: 1px solid #e0e0e0;
+      color: #fff;
+    }
+
+    .game-box {
+      background-color: #6271ff;
+      padding: 20px;
+      margin-bottom: 20px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      box-shadow: 0 1px 6px rgba(0,0,0,0.05);
+      transition: box-shadow 0.3s ease;
+    }
+
+    .game-box:hover {
+      box-shadow: 0 6px 18px rgba(0,122,204,0.25);
+    }
+
+    .game-box h2 {
+      color: #ffffff;
+      margin: 0 0 12px;
+      font-weight: 700;
+      font-size: 1.4rem;
+    }
+
+    footer {
+      background-color: #f0f0f0;
+      text-align: center;
+      padding: 15px 20px;
+      font-size: 0.9rem;
+      color: #777;
+      border-top: 1px solid #ddd;
+      border-radius: 0 0 8px 8px;
+      user-select: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <img src="https://upload.wikimedia.org/wikipedia/commons/8/83/Steam_icon_logo.svg" alt="klaOS Store" />
+      <div>Klaos</div>
+    </header>
+
+    <nav>
+      <div class="nav-links">
+        <a href="#">Início</a>
+        <a href="#">Jogos</a>
+        <a href="#">Ofertas</a>
+        <a href="#">Comunidade</a>
+        <a href="https://t.me/Nextmania">Suporte</a>
+      </div>
+      <div class="search-box">
+        <input type="text" id="search" placeholder="Pesquisar jogos..." />
+        <button type="button" onclick="searchItems()">Buscar</button>
+      </div>
+    </nav>
+
+    <!-- Banner dinâmico -->
+    <div class="banner">
+      <img id="banner-img" src="Far Cry Wallpaper HD.jpg" alt="Destaque do jogo" />
+      <div class="banner-info">
+        <h1 id="banner-title">Far cry 3</h1>
+        <p id="banner-desc">Adicionado recentemente.</p>
+      </div>
+    </div>
+
+    <div class="content">
+      <div class="main">
+        <h2>O oque o criador pensa?</h2>
+        <p>Não é tão complicado fazer um site, imagina baixar um jogo.</p>
+        <h2>uTorrent</h2>
+        <a class="button" href="https://www.utorrent.com/intl/pt_br/downloads/complete/track/stable/os/win/" target="_blank">Baixar uTorrent</a>
+        <br />
+      </div>
+      <div class="sidebar">
+        <p>Site totalmente "legal", aqui armazeno os principais jogos que vêm em minha cabeça, ou o que meus amigos me indicam.</p>
+      </div>
+    </div>
+        
+     <div class="banner">
+      <img id="banner-img" src="1343619.png" alt="Destaque do jogo" />
+      <div class="banner-info">
+        <h1 id="banner-title">Coleção de jogos</h1>
+        <p id="banner-desc">Aqui contem os principais jogoos adicionados.</p>
+      </div>
+    </div>
+
+    <div class="content">
+      <div class="main" id="gameList">
+        <div class="game-box">
+          <h2>Call of duty 2</h2>
+          <p>O clássico dos FPS da activision, agora no klaOS.</p>
+          <a href="magnet:?xt=urn:btih:SCPR4VDZMIXJPJN5J5ENZSEJSGXGCJT5" target="_blank">BAIXAR</a>
+        </div>
+        <div class="game-box">
+          <h2>Max payne 3</h2>
+          <p>Max in brazil!</p>
+          <a href="magnet:?xt=urn:btih:5d4172becde6361997e482edba5d60ad28c15f6e" target="_blank">BAIXAR</a>
+        </div>
+        <div class="game-box">
+          <h2>Fallout 3</h2>
+          <p>RPG que lembra .....</p>
+          <a href="magnet:?xt=urn:btih:d3cd3513a7d953e21be929be4fae24bcd98e2a2d" target="_blank">BAIXAR</a>
+        </div>
+        <div class="game-box">
+          <h2>Fallout New Vegas</h2>
+          <p>Continuação de um clássico</p>
+          <a href="magnet:?xt=urn:btih:AB17BE3C8B7FA88B3AF13E9C4FF7200B98525F3C" target="_blank">BAIXAR</a>
+        </div>
+        <div class="game-box">
+          <h2>Sleeping Dogs</h2>
+          <p>Um "GTA clone" muito foda</p>
+          <a href="magnet:?xt=urn:btih:6d27396746370b3b316ef0efc7867d1b26a8d415" target="_blank">BAIXAR</a>
+        </div>
+        <div class="game-box">
+          <h2>The Amazing Spider Man 2</h2>
+          <p>Este jogo do spider roda em qualquer PC, totalmente em pt/br</p>
+          <a href="magnet:?xt=urn:btih:B4CA44AFB0AD39AA86FD5EA25FFCBF80C8D36E1A" target="_blank">BAIXAR</a>
+        </div>
+        <div class="game-box">
+          <h2>Bully</h2>
+          <p>Um clássico da Rockstar em português</p>
+          <a href="magnet:?xt=urn:btih:EKD4VS47KKAVP3HVELCUC6HTMLYUA3MY" target="_blank">BAIXAR</a>
+        </div>
+        <div class="game-box">
+          <h2>Dead Island</h2>
+          <p>Leve e zumbiiiiii</p>
+          <a href="magnet:?xt=urn:btih:AR7ZYPOY6IQOF7MX2TQXRBAOHSIA7BGY" target="_blank">BAIXAR</a>
+        </div>
+         
+         <div class="game-box">
+            <h2>Far cry 3</h2>
+            <p>GOAT da ubi n tem como</p>
+            <a href="magnet:?xt=urn:btih:fb2241a0875ec890fa30d1806eca98ab455911f3&dn=Far+Cry+3+Complete+Collection+MULTi13-ElAmigos.iso" target="_blank">BAIXAR</a>
+         </div>
+        
+         <div class="game-box">
+            <h2>Assasins creed</h2>
+            <p>outro classico ubi</p>
+            <a href="magnet:?xt=urn:btih:124129b830fe2efcfe39e6c3993fe08a2e62f165&dn=Assassin%27s+Creed+-+Director%27s+Cut+1.02+ElAmigos" target="_blank">BAIXAR</a>
+         </div>
+          
+         <div class="game-box">
+            <h2>Just cause 2</h2>
+            <p>Ja joguei e é mt fd</p>
+            <a href=" magnet:?xt=urn:btih:C17EBC904B2BFD24F7E9A5B9646A7D6A507F9162&dn=Just.Cause.2.MULTi7.incl.6.DLC.iso&tr=udp%3a%2f%2fopen.demonii.com%3a1337%2fannounce&tr=udp%3a%2f%2ftracker.publicbt.com%3a80%2fannounce&tr=udp%3a%2f%2ftracker.openbittorrent.com%3a80%2fannounce&tr=udp%3a%2f%2ftracker.istole.it%3a80%2fannounce" target="_blank">BAIXAR</a>
+         </div>
+           <!-- INÍCIO DOS 100 BLOCOS -->
+<div class="game-box">
+  <h2> Battlefild 1</h2>
+  <p>Tiro massaaa</p>
+  <a href="magnet:?xt=urn:btih:69c624162b16099c949a2365f9907915c2ac9016" target="_blank">BAIXAR</a>
+</div>
+<div class="game-box">
+  <h2>The Elder Scrolls V Skyrim</h2>
+  <p>Rpg fodaaaaaaa</p>
+  <a href="magnet:?xt=urn:btih:e740ea83d04aef83a4ed687fb20b1136fe74c5b4" target="_blank">BAIXAR</a>
+</div>
+<div class="game-box">
+  <h2>POSTAL 4 No Regert</h2>
+  <p></p>
+  <a href="magnet:?xt=urn:btih:45MBJCA6UG3IQD5F76PO4H7LOBEKMDVM" target="_blank">BAIXAR</a>
+</div>
+<div class="game-box">
+  <h2>Battlefield Bad Company 2</h2>
+  <p></p>
+  <a href="magnet:?xt=urn:btih:8586DACEDA26CC7C8E6F3B8D286BDB3061928D8A" target="_blank">BAIXAR</a>
+</div>
+<div class="game-box">
+  <h2>Batman: Arkham Asylum</h2>
+  <p></p>
+  <a href="magnet:?xt=urn:btih:1D63A03E8DED008A8879D14769E016E9708D6357" target="_blank">BAIXAR</a>
+</div>
+<div class="game-box">
+  <h2>Batman: Arkham City </h2>
+  <p></p>
+  <a href="magnet:?xt=urn:btih:5ED7B8C5BD33B593D3011E3249A64B0F2400980F" target="_blank">BAIXAR</a>
+</div>
+<div class="game-box">
+  <h2>Batman: Arkham Origins</h2>
+  <p></p>
+  <a href="magnet:?xt=urn:btih:3F8458000998E856A6DEBD0B4767AAEFC945013F" target="_blank">BAIXAR</a>
+</div>
+<div class="game-box">
+  <h2>Batman: Arkham Knight </h2>
+  <p>gays</p>
+  <a href="magnet:?xt=urn:btih:bc3c6a84c76f883946239309e0735bd22acecce1" target="_blank">BAIXAR</a>
+</div>
+<div class="game-box">
+  <h2>GTA San Andreas</h2>
+  <p></p>
+  <a href="magnet:?xt=urn:btih:6abb5be16784ee66dd2f1dbd5cb86730464974e0" target="_blank">BAIXAR</a>
+</div>
+<div class="game-box">
+  <h2>Battlefield 3</h2>
+  <p></p>
+  <a href="magnet:?xt=urn:btih:D3B30CC64D410112DF4BC515AC12438E17D82852" target="_blank">BAIXAR</a>
+</div>
+
+<!-- ... aqui seguiria até o 100 ... -->
+
+<div class="game-box">
+  <h2>Need for Speed Most Wanted </h2>
+  <p></p>
+  <a href="magnet:?xt=urn:btih:2d1b072a7d55102d080010c13f04e542d8cf5eae&dn=Need.for.Speed.Most.Wanted.Black.Edition.Repack-R.G.%D0%9C%D0%B5chanics&tr=udp%3A%2F%2Ftracker.openbittorrent.com%3A80&tr=udp%3A%2F%2Fopen.demonii.com%3A1337&tr=udp%3A%2F%2Ftracker.coppersurfer.tk%3A6969&tr=udp%3A%2F%2Fexodus.desync.com%3A6969" target="_blank">BAIXAR</a>
+</div>
+<!-- FIM DOS 100 BLOCOS -->
+<!-- INÍCIO DOS 100 BLOCOS -->
+<div class="game-box">
+  <h2>Sniper Elite 3</h2>
+  <p></p>
+  <a href="magnet:?xt=urn:btih:PUIG67DWFXI5JWFJSAJ2YT7GVO552ODR&dn=Sniper.Elite.3.MULTi13-PLAZA&tr=udp%3A%2F%2Ftracker.opentrackr.org%3A1337%2Fannounce" target="_blank">BAIXAR</a>
+</div>
+<div class="game-box">
+  <h2>Kingdom Come Deliverance</h2>
+  <p></p>
+  <a href="mmagnet:?xt=urn:btih:MTI5LOGCKGZ7JLHLFIKVXFH3OBKWZMPJ&dn=Kingdom_Come_Deliverance_1.9.6-404-504czj3_(62297)_win_gog&tr=udp%3A%2F%2Ftracker.openbittorrent.com%3A80%2Fannounce" target="_blank">BAIXAR</a>
+</div>
+<div class="game-box">
+  <h2>Assassin’s Creed IV Black Flag</h2>
+  <p></p>
+  <a href="magnet:?xt=urn:btih:LHISKMF2L4NCXTIFKACDTQ3557WRZLIN" target="_blank">BAIXAR</a>
+</div>
+<div class="game-box">
+  <h2>Devil May Cry 5</h2>
+  <p></p>
+  <a href="magnet:?xt=urn:btih:beb80710c71b69c8e4de942ba7e344c0c0f8cbb0" target="_blank">BAIXAR</a>
+</div>
+<div class="game-box">
+  <h2>Watch Dogs</h2>
+  <p></p>
+  <a href="magnet:?xt=urn:btih:4IHE465VSDN73G42SCMBTBVUW2B5N5EC" target="_blank">BAIXAR</a>
+</div>
+<div class="game-box">
+  <h2>DELTARUNE</h2>
+  <p></p>
+  <a href="https://www.mediafire.com/file/yk2mm4gsqlfum91" target="_blank">BAIXAR</a>
+</div>
+<div class="game-box">
+  <h2>Teenage Mutant Ninja Turtles Splintered Fate</h2>
+  <p></p>
+  <a href="magnet:?xt=urn:btih:A8E8DC809B9582067845F0CD2FF574F95933B892&dn=Teenage+Mutant+Ninja+Turtles+Splintered+Fate-TENOKE&tr=udp%3A%2F%2Ftracker.torrent.eu.org%3A451%2Fannounce&tr=udp%3A%2F%2Fexodus.desync.com%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.moeking.me%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.opentrackr.org%3A1337%2Fannounce&tr=udp%3A%2F%2Fopen.stealth.si%3A80%2Fannounce&tr=udp%3A%2F%2Ftracker.theoks.net%3A6969%2Fannounce&tr=udp%3A%2F%2Fmovies.zsw.ca%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker-udp.gbitt.info%3A80%2Fannounce&tr=udp%3A%2F%2Ftracker.tiny-vps.com%3A6969%2Fannounce&tr=http%3A%2F%2Ftracker.gbitt.info%3A80%2Fannounce&tr=http%3A%2F%2Ftracker.ccp.ovh%3A6969%2Fannounce&tr=https%3A%2F%2Ftracker.gbitt.info%3A443%2Fannounce&tr=udp%3A%2F%2Ftracker.dler.com%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.ccp.ovh%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.opentrackr.org%3A1337%2Fannounce&tr=http%3A%2F%2Ftracker.openbittorrent.com%3A80%2Fannounce&tr=udp%3A%2F%2Fopentracker.i2p.rocks%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.internetwarriors.net%3A1337%2Fannounce&tr=udp%3A%2F%2Ftracker.leechers-paradise.org%3A6969%2Fannounce&tr=udp%3A%2F%2Fcoppersurfer.tk%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.zer0day.to%3A1337%2Fannounce" target="_blank">BAIXAR</a>
+</div>
+<div class="game-box">
+  <h2>NINJA GAIDEN 2 Black 8</h2>
+  <p></p>
+  <a href="magnet:?xt=urn:btih:AA5F5C3DDA006B9D4EA47910156B970A3A7365E3&dn=Ninja+Gaiden+2+Black+%28v1.0.5.0+%2B+MULTi8%29+%5BDODI+Repack%5D&tr=udp%3A%2F%2F9.rarbg.to%3A2870%2Fannounce&tr=udp%3A%2F%2Feddie4.nl%3A6969%2Fannounce&tr=udp%3A%2F%2Fthetracker.org%3A80%2Fannounce&tr=udp%3A%2F%2Ftracker.coppersurfer.tk%3A6969&tr=udp%3A%2F%2Ftracker.leechers-paradise.org%3A6969&tr=udp%3A%2F%2Ftracker.opentrackr.org%3A1337&tr=udp%3A%2F%2Ftracker.zer0day.to%3A1337&tr=udp%3A%2F%2F9.rarbg.com%3A2710%2Fannounce&tr=udp%3A%2F%2Fexplodie.org%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker1.wasabii.com.tw%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.torrent.eu.org%3A451%2Fannounce&tr=udp%3A%2F%2Ftracker.cypherpunks.ru%3A6969%2Fannounce&tr=udp%3A%2F%2Fp4p.arenabg.com%3A1337%2Fannounce&tr=udp%3A%2F%2Ftracker.opentrackr.org%3A1337%2Fannounce&tr=http%3A%2F%2Ftracker.openbittorrent.com%3A80%2Fannounce&tr=udp%3A%2F%2Fopentracker.i2p.rocks%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.internetwarriors.net%3A1337%2Fannounce&tr=udp%3A%2F%2Ftracker.leechers-paradise.org%3A6969%2Fannounce&tr=udp%3A%2F%2Fcoppersurfer.tk%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.zer0day.to%3A1337%2Fannounce" target="_blank">BAIXAR</a>
+</div>
+<div class="game-box">
+  <h2>Jogo 9</h2>
+  <p></p>
+  <a href="magnet:?xt=urn:btih:HASH00009" target="_blank">BAIXAR</a>
+</div>
+<div class="game-box">s
+  <h2>Mad Max Torrent</h2>
+  <p></p>
+  <a href="magnet:?xt=urn:btih:1f02292a28e463c31e7ca5fde724f00dc3ae9368&dn=Mad+Max+Ripper+Special+Edition+%28build+29.04.2018%29+ElAmigos" target="_blank">BAIXAR</a>
+</div>
+
+<!-- ... aqui seguiria até o 100 ... -->
+
+<div class="game-box">
+  <h2>Metal Gear Solid V</h2>
+  <p></p>
+  <a href="magnet:?xt=urn:btih:62EEQIZYGL2KTHEY3TU4IZ5DG6YKZ322&dn=Metal.Gear.Solid.V.The.Phantom.Pain-CPY&tr=http%3A%2F%2Ftracker.trackerfix.com%3A80%2Fannounce" target="_blank">BAIXAR</a>
+</div>
+<!-- FIM DOS 100 BLOCOS -->
+<!-- INÍCIO DOS 100 BLOCOS -->
+<div class="game-box">
+  <h2>Outlast 2 Torrent</h2>
+  <p></p>
+  <a href="magnet:?xt=urn:btih:1aaa2810563933b7d3b9bf5e1e0dd5a1ae38fa79&dn=Outlast+2-CODEX&tr=udp%3A%2F%2Ftracker.leechers-paradise.org%3A6969&tr=udp%3A%2F%2Fzer0day.ch%3A1337&tr=udp%3A%2F%2Fopen.demonii.com%3A1337&tr=udp%3A%2F%2Ftracker.coppersurfer.tk%3A6969&tr=udp%3A%2F%2Fexodus.desync.com%3A69691" target="_blank">BAIXAR</a>
+</div>
+<div class="game-box">
+  <h2>Dead Space </h2>
+  <p></p>
+  <a href="magnet:?xt=urn:btih:8ca6511ec67a054537900e6c8155b05305903a65&dn=Dead+Space" target="_blank">BAIXAR</a>
+</div>
+<div class="game-box">
+  <h2>Counter Strike Source</h2>
+  <p></p>
+  <a href="magnet:?xt=urn:btih:EA7BB580C57590FFE615263DC9DED03681866AB6&dn=Counter-Strike+Source+v6630498+Full+%2BAutoUpdate+%2BMultilanguage&tr=udp%3A%2F%2Ftracker.coppersurfer.tk%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.openbittorrent.com%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.opentrackr.org%3A1337&tr=udp%3A%2F%2Ftracker.leechers-paradise.org%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.dler.org%3A6969%2Fannounce&tr=udp%3A%2F%2Fopentracker.i2p.rocks%3A6969%2Fannounce&tr=udp%3A%2F%2F47.ip-51-68-199.eu%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.internetwarriors.net%3A1337%2Fannounce&tr=udp%3A%2F%2F9.rarbg.to%3A2920%2Fannounce&tr=udp%3A%2F%2Ftracker.pirateparty.gr%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.cyberia.is%3A6969%2Fannounce" target="_blank">BAIXAR</a>
+</div>
+<div class="game-box">
+  <h2>Crysis 2</h2>
+  <p></p>
+  <a href="magnet:?xt=urn:btih:L6NDQLOROUEJ4WOBAAX7X4ACXYBJOL3Z" target="_blank">BAIXAR</a>
+</div>
+<div class="game-box">
+  <h2>Call of duty black ops 2</h2>
+  <p></p>
+  <a href="magnet:?xt=urn:btih:8D824729948DD3FFF906CD70F4E3D806A7AB8FD4&dn=Call+of+Duty%3A+Black+Ops+2+%28%2B36+DLCs+%2B+MP+with+Bots+%2B+Zombie+Mode%2C+MULTi7%29+%5BFitGirl+Repack%2C+Selective+Download+-+from+8.4+GB%5D&tr=udp%3A%2F%2F9.rarbg.to%3A2710%2Fannounce&tr=udp%3A%2F%2Feddie4.nl%3A6969%2Fannounce&tr=udp%3A%2F%2Fshadowshq.yi.org%3A6969%2Fannounce&tr=udp%3A%2F%2Fthetracker.org%3A80%2Fannounce&tr=udp%3A%2F%2Ftracker.coppersurfer.tk%3A6969&tr=udp%3A%2F%2Ftracker.leechers-paradise.org%3A6969&tr=udp%3A%2F%2Ftracker.opentrackr.org%3A1337&tr=udp%3A%2F%2Ftracker.piratepublic.com%3A1337%2Fannounce&tr=udp%3A%2F%2Ftracker.zer0day.to%3A1337&tr=udp%3A%2F%2F9.rarbg.com%3A2710%2Fannounce&tr=udp%3A%2F%2Fexplodie.org%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker1.wasabii.com.tw%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.torrent.eu.org%3A451%2Fannounce&tr=udp%3A%2F%2Ftracker.cypherpunks.ru%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.opentrackr.org%3A1337%2Fannounce&tr=http%3A%2F%2Ftracker.openbittorrent.com%3A80%2Fannounce&tr=udp%3A%2F%2Fopentracker.i2p.rocks%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.internetwarriors.net%3A1337%2Fannounce&tr=udp%3A%2F%2Ftracker.leechers-paradise.org%3A6969%2Fannounce&tr=udp%3A%2F%2Fcoppersurfer.tk%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.zer0day.to%3A1337%2Fannounce" target="_blank">BAIXAR</a>
+</div>
+<div class="game-box">
+  <h2>Bayonetta 2</h2>
+  <p></p>
+  <a href="magnet:?xt=urn:btih:B697A22048FE8C94430A4304541268D84C0301A4&dn=Bayonetta%202%20%28CEmu%201.11.3%29&tr=udp%3a%2f%2fshubt.net%3a2710&tr=http%3a%2f%2fretracker.local%2fannounce&tr=http%3a%2f%2ftracker.filetracker.pl%3a8089%2fannounce&tr=http%3a%2f%2ftracker2.wasabii.com.tw%3a6969%2fannounce&tr=http%3a%2f%2ftracker.grepler.com%3a6969%2fannounce&tr=http%3a%2f%2f125.227.35.196%3a6969%2fannounce&tr=http%3a%2f%2ftracker.tiny-vps.com%3a6969%2fannounce&tr=http%3a%2f%2f87.248.186.252%3a8080%2fannounce&tr=http%3a%2f%2f210.244.71.25%3a6969%2fannounce&tr=http%3a%2f%2f46.4.109.148%3a6969%2fannounce&tr=udp%3a%2f%2f46.148.18.250%3a2710&tr=http%3a%2f%2ftracker.dler.org%3a6969%2fannounce&tr=udp%3a%2f%2f%5b2001%3a67c%3a28f8%3a92%3a%3a1111%3a1%5d%3a2710&tr=udp%3a%2f%2fipv6.leechers-paradise.org%3a6969&tr=udp%3a%2f%2f9.rarbg.com%3a2780%2fannounce&tr=http%3a%2f%2fannounce.torrentsmd.com%3a6969%2fannounce&tr=http%3a%2f%2fbt.careland.com.cn%3a6969%2fannounce&tr=udp%3a%2f%2fexplodie.org%3a6969%2fannounce&tr=http%3a%2f%2fmgtracker.org%3a2710%2fannounce&tr=http%3a%2f%2ftracker.tfile.me%2fannounce&tr=http%3a%2f%2ftracker.torrenty.org%3a6969%2fannounce&tr=udp%3a%2f%2ftracker.trackerfix.com%3a82%2fannounce&tr=http%3a%2f%2fwww.mvgroup.org%3a2710%2fannounce&tr=udp%3a%2f%2f9.rarbg.com%3a2780%2fannounce&tr=udp%3a%2f%2f9.rarbg.me%3a2800%2fannounce&tr=udp%3a%2f%2f9.rarbg.to%3a2780%2fannounce&tr=udp%3a%2f%2fcoppersurfer.tk%3a6969%2fannounce&tr=udp%3a%2f%2fexodus.desync.com%3a6969%2fannounce&tr=http%3a%2f%2fglotorrents.pw%3a80%2fannounce&tr=udp%3a%2f%2fopen.demonii.com%3a1337%2fannounce&tr=udp%3a%2f%2ftracker.coppersurfer.tk%3a6969%2fannounce&tr=udp%3a%2f%2ftracker.glotorrents.com%3a6969%2fannounce&tr=udp%3a%2f%2ftracker.leechers-paradise.org%3a6969%2fannounce&tr=udp%3a%2f%2ftracker.openbittorrent.com%3a80%2fannounce&tr=udp%3a%2f%2ftracker.opentrackr.org%3a1337%2fannounce&tr=udp%3a%2f%2ftracker.publicbt.com%3a80%2fannounce&tr=udp%3a%2f%2ftracker4.piratux.com%3a6969%2fannounce&tr=udp%3a%2f%2fpublic.popcorn-tracker.org%3a6969%2fannounce" target="_blank">BAIXAR</a>
+</div>
+<div class="game-box">
+  <h2>Metal Gear Rising Revengeance</h2>
+  <p></p>
+  <a href="magnet:?xt=urn:btih:BBMKJJVI7DRH7LGSQMBL37FRGG3656V7&dn=Metal%20Gear%20Rising%20Revengeance%20(incl.%20Update%202)&tr=udp%3A%2F%2Fshubt.net%3A2710" target="_blank">BAIXAR</a>
+</div>
+<div class="game-box">
+  <h2>Jogo 8</h2>
+  <p></p>
+  <a href="magnet:?xt=urn:btih:HASH00008" target="_blank">BAIXAR</a>
+</div>
+<div class="game-box">
+  <h2>Jogo 9</h2>
+  <p></p>
+  <a href="magnet:?xt=urn:btih:HASH00009" target="_blank">BAIXAR</a>
+</div>
+<div class="game-box">
+  <h2>Jogo 10</h2>
+  <p></p>
+  <a href="magnet:?xt=urn:btih:HASH00010" target="_blank">BAIXAR</a>
+</div>
+
+<!-- ... aqui seguiria até o 100 ... -->
+
+<div class="game-box">
+  <h2>Jogo 100</h2>
+  <p></p>
+  <a href="magnet:?xt=urn:btih:HASH00100" target="_blank">BAIXAR</a>
+</div>
+<!-- FIM DOS 100 BLOCOS -->
+<!-- INÍCIO DOS 100 BLOCOS -->
+<div class="game-box">
+  <h2>Jogo 1</h2>
+  <p></p>
+  <a href="magnet:?xt=urn:btih:HASH00001" target="_blank">BAIXAR</a>
+</div>
+<div class="game-box">
+  <h2>Jogo 2</h2>
+  <p></p>
+  <a href="magnet:?xt=urn:btih:HASH00002" target="_blank">BAIXAR</a>
+</div>
+<div class="game-box">
+  <h2>Jogo 3</h2>
+  <p></p>
+  <a href="magnet:?xt=urn:btih:HASH00003" target="_blank">BAIXAR</a>
+</div>
+<div class="game-box">
+  <h2>Jogo 4</h2>
+  <p></p>
+  <a href="magnet:?xt=urn:btih:HASH00004" target="_blank">BAIXAR</a>
+</div>
+<div class="game-box">
+  <h2>Jogo 5</h2>
+  <p></p>
+  <a href="magnet:?xt=urn:btih:HASH00005" target="_blank">BAIXAR</a>
+</div>
+<div class="game-box">
+  <h2>Jogo 6</h2>
+  <p></p>
+  <a href="magnet:?xt=urn:btih:HASH00006" target="_blank">BAIXAR</a>
+</div>
+<div class="game-box">
+  <h2>Jogo 7</h2>
+  <p></p>
+  <a href="magnet:?xt=urn:btih:HASH00007" target="_blank">BAIXAR</a>
+</div>
+<div class="game-box">
+  <h2>Jogo 8</h2>
+  <p></p>
+  <a href="magnet:?xt=urn:btih:HASH00008" target="_blank">BAIXAR</a>
+</div>
+<div class="game-box">
+  <h2>Jogo 9</h2>
+  <p></p>
+  <a href="magnet:?xt=urn:btih:HASH00009" target="_blank">BAIXAR</a>
+</div>
+<div class="game-box">
+  <h2>Jogo 10</h2>
+  <p></p>
+  <a href="magnet:?xt=urn:btih:HASH00010" target="_blank">BAIXAR</a>
+</div>
+
+<!-- ... aqui seguiria até o 100 ... -->
+
+<div class="game-box">
+  <h2>Jogo 100</h2>
+  <p></p>
+  <a href="magnet:?xt=urn:btih:HASH00100" target="_blank">BAIXAR</a>
+</div>
+<!-- FIM DOS 100 BLOCOS -->
+<!-- INÍCIO DOS 100 BLOCOS -->
+<div class="game-box">
+  <h2>Jogo 1</h2>
+  <p></p>
+  <a href="magnet:?xt=urn:btih:HASH00001" target="_blank">BAIXAR</a>
+</div>
+<div class="game-box">
+  <h2>Jogo 2</h2>
+  <p></p>
+  <a href="magnet:?xt=urn:btih:HASH00002" target="_blank">BAIXAR</a>
+</div>
+<div class="game-box">
+  <h2>Jogo 3</h2>
+  <p></p>
+  <a href="magnet:?xt=urn:btih:HASH00003" target="_blank">BAIXAR</a>
+</div>
+<div class="game-box">
+  <h2>Jogo 4</h2>
+  <p></p>
+  <a href="magnet:?xt=urn:btih:HASH00004" target="_blank">BAIXAR</a>
+</div>
+<div class="game-box">
+  <h2>Jogo 5</h2>
+  <p></p>
+  <a href="magnet:?xt=urn:btih:HASH00005" target="_blank">BAIXAR</a>
+</div>
+<div class="game-box">
+  <h2>Jogo 6</h2>
+  <p></p>
+  <a href="magnet:?xt=urn:btih:HASH00006" target="_blank">BAIXAR</a>
+</div>
+<div class="game-box">
+  <h2>Jogo 7</h2>
+  <p></p>
+  <a href="magnet:?xt=urn:btih:HASH00007" target="_blank">BAIXAR</a>
+</div>
+<div class="game-box">
+  <h2>Jogo 8</h2>
+  <p></p>
+  <a href="magnet:?xt=urn:btih:HASH00008" target="_blank">BAIXAR</a>
+</div>
+<div class="game-box">
+  <h2>Jogo 9</h2>
+  <p></p>
+  <a href="magnet:?xt=urn:btih:HASH00009" target="_blank">BAIXAR</a>
+</div>
+<div class="game-box">
+  <h2>Jogo 10</h2>
+  <p></p>
+  <a href="magnet:?xt=urn:btih:HASH00010" target="_blank">BAIXAR</a>
+</div>
+
+<!-- ... aqui seguiria até o 100 ... -->
+
+<div class="game-box">
+  <h2>Jogo 100</h2>
+  <p></p>
+  <a href="magnet:?xt=urn:btih:HASH00100" target="_blank">BAIXAR</a>
+</div>
+<!-- FIM DOS 100 BLOCOS -->
+
+        </div>
+    </div>
+
+    <footer>
+      &copy; Como sempre. Kléber fazzendo merda.— 
+    </footer>
+  </div>
+
+  <script>
+    function searchItems() {
+      const input = document.getElementById('search').value.toLowerCase();
+      const games = document.querySelectorAll('.game-box');
+
+      games.forEach(game => {
+        const text = game.textContent.toLowerCase();
+        game.style.display = text.includes(input) ? 'block' : 'none';
+      });
+    }
+
+    // Busca em tempo real enquanto digita
+    document.getElementById('search').addEventListener('input', searchItems);
+  </script>
+</body>
+</html>
