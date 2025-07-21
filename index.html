@@ -2,277 +2,218 @@
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8" />
-  <title>klaOS Game Store</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Klaos</title>
+  <link rel="icon" href="https://cdn.cloudflare.steamstatic.com/favicon.ico" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Roboto&display=swap" rel="stylesheet">
+
   <style>
-    body {
-      margin: 0;
-      padding: 0;
-      background-color: #f5f7fa;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      color: #333;
+    :root {
+      --bg: #0d1117;
+      --card-bg: #161b22;
+      --highlight: #58a6ff;
+      --text: #c9d1d9;
+      --font-title: 'Orbitron', sans-serif;
+      --font-body: 'Roboto', sans-serif;
     }
 
-    .container {
-      max-width: 980px;
-      margin: 0 auto;
-      background-color: #fff;
-      border-left: 1px solid #ddd;
-      border-right: 1px solid #ddd;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-      border-radius: 8px;
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-body);
     }
 
     header {
-      background-color: #007af5;
-      padding: 20px 30px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      border-bottom: 1px solid #e0e0e0;
-      border-radius: 8px 8px 0 0;
-    }
-
-    header img {
-      height: 50px;
-      filter: drop-shadow(0 1px 1px rgba(0,0,0,0.1));
-    }
-
-    header div {
-      font-weight: 700;
-      font-size: 1.5rem;
-      color: #007acc;
-      letter-spacing: 1px;
-    }
-
-    nav {
-      background-color: #fafafa;
+      background-color: #010409;
+      padding: 1rem 2rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 12px 30px;
-      border-bottom: 1px solid #e0e0e0;
-      flex-wrap: wrap;
+      border-bottom: 1px solid #21262d;
+      position: sticky;
+      top: 0;
+      z-index: 100;
     }
 
-    .nav-links {
-      display: flex;
-      gap: 12px;
+    header h1 {
+      font-family: var(--font-title);
+      color: var(--highlight);
+      font-size: 1.8rem;
     }
 
     nav a {
-      color: #007acc;
+      margin-left: 2rem;
       text-decoration: none;
-      padding: 8px 18px;
-      font-weight: 600;
-      border-radius: 6px;
-      transition: background-color 0.3s ease, color 0.3s ease;
-      user-select: none;
+      color: var(--text);
+      font-size: 1rem;
+      transition: color 0.3s;
     }
 
     nav a:hover {
-      background-color: #007acc;
-      color: #fff;
-      box-shadow: 0 2px 8px rgba(0, 122, 204, 0.3);
+      color: var(--highlight);
     }
 
-    .search-box {
-      display: flex;
-      border-radius: 6px;
-      overflow: hidden;
-      box-shadow: 0 1px 4px rgba(0,0,0,0.1);
-    }
-
-    .search-box input {
-      padding: 8px 12px;
-      border: none;
-      outline: none;
-      font-size: 1rem;
-      width: 200px;
-      color: #333;
-    }
-
-    .search-box button {
-      padding: 8px 16px;
-      background-color: #007acc;
-      color: #fff;
-      border: none;
-      cursor: pointer;
-      font-weight: 600;
-      transition: background-color 0.3s ease;
-    }
-
-    .search-box button:hover {
-      background-color: #005f99;
-    }
-
-    /* Botões personalizados */
-    .button {
-      background-color: #007acc;
-      color: #fff;
-      border: none;
-      padding: 10px 18px;
-      margin-top: 10px;
-      border-radius: 6px;
-      font-weight: bold;
-      cursor: pointer;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-      transition: background-color 0.3s ease, transform 0.2s ease;
-    }
-
-    .button:hover {
-      background-color: #005f99;
-      transform: scale(1.03);
-    }
-
-    /* Banner dinâmico */
-    .banner {
+    .hero {
+      background: linear-gradient(to right, rgba(0,0,0,0.6), rgba(0,0,0,0.3)),
+      url('https://pixelz.cc/wp-content/uploads/2023/09/xbox-game-studios-uhd-4k-wallpaper.jpg') center/cover no-repeat;
+      height: 400px;
       display: flex;
       align-items: center;
-      gap: 30px;
-      background: linear-gradient(90deg, #007acc, #005f99);
-      padding: 25px 30px;
-      color: #fff;
-      border-radius: 0 0 8px 8px;
-      user-select: none;
-      overflow: hidden;
+      justify-content: center;
+      font-size: 3rem;
+      font-family: var(--font-title);
+      color: white;
+      text-shadow: 0 0 10px black;
     }
 
-    .banner img {
-      max-height: 140px;
-      width: auto;
-      border-radius: 12px;
-      box-shadow: 0 4px 14px rgba(0,0,0,0.5);
-      flex-shrink: 0;
-      opacity: 1;
-      transition: opacity 0.8s ease;
-      object-fit: contain;
-      background-color: #00000020;
-    }
-
-    .banner-info {
-      max-width: 600px;
-      opacity: 1;
-      transition: opacity 0.8s ease;
-    }
-
-    .banner-info h1 {
-      margin: 0 0 8px;
+    .section-title {
+      text-align: center;
       font-size: 2rem;
-      text-shadow: 0 1px 6px rgba(0,0,0,0.5);
+      font-family: var(--font-title);
+      margin: 2rem auto 1rem;
     }
 
-    .banner-info p {
-      margin: 0;
-      font-size: 1.1rem;
-      font-weight: 500;
-      text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+    .games {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      padding: 2rem;
     }
 
-    .content {
-      display: flex;
-      padding: 30px;
-      gap: 30px;
-      color: #333;
+    .game-card {
+      background-color: var(--card-bg);
+      border-radius: 10px;
+      overflow: hidden;
+      transition: transform 0.3s;
+      box-shadow: 0 0 15px rgba(0,0,0,0.5);
     }
 
-    .main {
-      flex: 3;
+    .game-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 0 25px var(--highlight);
     }
 
-    .sidebar {
-      flex: 1;
-      background-color: #007af5;
-      padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 1px 6px rgba(0,0,0,0.1);
-      border: 1px solid #e0e0e0;
-      color: #fff;
+    .game-card img {
+      width: 100%;
+      display: block;
+    }
+
+    .game-card h3 {
+      text-align: center;
+      font-family: var(--font-title);
+      padding: 1rem;
+      font-size: 1.2rem;
+    }
+
+    .search-bar {
+      text-align: center;
+      padding: 1rem;
+    }
+
+    .search-bar input {
+      width: 80%;
+      max-width: 500px;
+      padding: 0.6rem;
+      border: none;
+      border-radius: 5px;
+      font-size: 1rem;
     }
 
     .game-box {
-      background-color: #6271ff;
-      padding: 20px;
-      margin-bottom: 20px;
-      border: 1px solid #ddd;
+      background-color: var(--card-bg);
       border-radius: 10px;
-      box-shadow: 0 1px 6px rgba(0,0,0,0.05);
-      transition: box-shadow 0.3s ease;
-    }
-
-    .game-box:hover {
-      box-shadow: 0 6px 18px rgba(0,122,204,0.25);
+      padding: 1rem;
+      margin: 1rem auto;
+      max-width: 600px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.3);
     }
 
     .game-box h2 {
-      color: #ffffff;
-      margin: 0 0 12px;
-      font-weight: 700;
-      font-size: 1.4rem;
+      font-family: var(--font-title);
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+      color: var(--highlight);
+    }
+
+    .game-box p {
+      font-size: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .game-box a {
+      display: inline-block;
+      padding: 0.5rem 1rem;
+      background-color: var(--highlight);
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: bold;
+    }
+
+    .game-box a:hover {
+      background-color: #1f6feb;
     }
 
     footer {
-      background-color: #f0f0f0;
+      background-color: #010409;
       text-align: center;
-      padding: 15px 20px;
+      padding: 1rem;
+      margin-top: 2rem;
       font-size: 0.9rem;
-      color: #777;
-      border-top: 1px solid #ddd;
-      border-radius: 0 0 8px 8px;
-      user-select: none;
+      color: #8b949e;
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <header>
-      <img src="https://upload.wikimedia.org/wikipedia/commons/8/83/Steam_icon_logo.svg" alt="klaOS Store" />
-      <div>Klaos</div>
-    </header>
 
-    <nav>
-      <div class="nav-links">
-        <a href="precinhos.html">Início</a>
-        <a href="#">Jogos</a>
-        <a href="ppl.html">Ofertas</a>
-        <a href="#">Comunidade</a>
-        <a href="https://t.me/Nextmania">Suporte</a>
-      </div>
-      <div class="search-box">
-        <input type="text" id="search" placeholder="Pesquisar jogos..." />
-        <button type="button" onclick="searchItems()">Buscar</button>
-      </div>
-    </nav>
+<header>
+  <h1>Klaos v2</h1>
+  <nav>
+    <a href="#">Loja</a>
+    <a href="#">Biblioteca</a>
+    <a href="#">Comunidade</a>
+    <a href="#">Suporte</a>
+  </nav>
+</header>
 
-    <!-- Banner dinâmico -->
-    <div class="banner">
-      <img id="banner-img" src="Far Cry Wallpaper HD.jpg" alt="Destaque do jogo" />
-      <div class="banner-info">
-        <h1 id="banner-title">Far cry 3</h1>
-        <p id="banner-desc">Adicionado recentemente.</p>
-      </div>
-    </div>
+<div class="hero">
+  Baixe e aproveite
+</div>
 
-    <div class="content">
-      <div class="main">
-        <h2>O oque o criador pensa?</h2>
-        <p>Não é tão complicado fazer um site, imagina baixar um jogo.</p>
-        <h2>uTorrent</h2>
-        <a class="button" href="https://www.utorrent.com/intl/pt_br/downloads/complete/track/stable/os/win/" target="_blank">Baixar uTorrent</a>
-        <br />
-      </div>
-      <div class="sidebar">
-        <p>Site totalmente "legal", aqui armazeno os principais jogos que vêm em minha cabeça, ou o que meus amigos me indicam.</p>
-      </div>
-    </div>
-        
-     <div class="banner">     
-      <div class="banner-info">
-        <h1 id="banner-title">Coleção de jogos</h1>
-        <p id="banner-desc">Aqui contem os principais jogoos adicionados.</p>
-      </div>
-    </div>
+<!-- 🎮 Jogos em destaque -->
+<div class="section-title">Jogos em destaque</div>
+<section class="games" id="gameList">
+  <div class="game-card">
+    <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/1091500/header.jpg" alt="Cyberpunk 2077">
+    <h3>Cyberpunk 2077</h3>
+  </div>
+  <div class="game-card">
+    <img src="l.a2.jpeg" alt="GTA V">
+    <h3>l.a noire</h3>
+  </div>
+  <div class="game-card">
+    <img src="cs.c.jpeg" alt="Apex Legends">
+    <h3>CS Cource</h3>
+  </div>
+  <div class="game-card">
+    <img src="3.jpeg" alt="Counter-Strike 2">
+    <h3>Far cry 3</h3>
+  </div>
+</section>
 
-    <div class="content">
+<!-- 🔎 Barra de busca abaixo dos destaques -->
+<div class="search-bar">
+  <input type="text" id="searchInput" placeholder="Ache teu jogo">
+</div>
+
+<!-- 📦 GameBox fixa -->
+<div class="content">
       <div class="main" id="gameList">
         <div class="game-box">
           <h2>Call of duty 2</h2>
@@ -518,142 +459,24 @@
   <p></p>
   <a href="magnet:?xt=urn:btih:TPICHVYRBOFSTAXVPFT6R7VRM6YX3WCT&dn=L.A..Noire.The.Complete.Edition.elamigos-games.com&tr=udp%3A%2F%2Fpublic.popcorn-tracker.org%3A6969%2Fannounce" target="_blank">BAIXAR</a>
 </div>
-<div class="game-box">
-  <h2>Jogo 2</h2>
-  <p></p>
-  <a href="magnet:?xt=urn:btih:HASH00002" target="_blank">BAIXAR</a>
-</div>
-<div class="game-box">
-  <h2>Jogo 3</h2>
-  <p></p>
-  <a href="magnet:?xt=urn:btih:HASH00003" target="_blank">BAIXAR</a>
-</div>
-<div class="game-box">
-  <h2>Jogo 4</h2>
-  <p></p>
-  <a href="magnet:?xt=urn:btih:HASH00004" target="_blank">BAIXAR</a>
-</div>
-<div class="game-box">
-  <h2>Jogo 5</h2>
-  <p></p>
-  <a href="magnet:?xt=urn:btih:HASH00005" target="_blank">BAIXAR</a>
-</div>
-<div class="game-box">
-  <h2>Jogo 6</h2>
-  <p></p>
-  <a href="magnet:?xt=urn:btih:HASH00006" target="_blank">BAIXAR</a>
-</div>
-<div class="game-box">
-  <h2>Jogo 7</h2>
-  <p></p>
-  <a href="magnet:?xt=urn:btih:HASH00007" target="_blank">BAIXAR</a>
-</div>
-<div class="game-box">
-  <h2>Jogo 8</h2>
-  <p></p>
-  <a href="magnet:?xt=urn:btih:HASH00008" target="_blank">BAIXAR</a>
-</div>
-<div class="game-box">
-  <h2>Jogo 9</h2>
-  <p></p>
-  <a href="magnet:?xt=urn:btih:HASH00009" target="_blank">BAIXAR</a>
-</div>
-<div class="game-box">
-  <h2>Jogo 10</h2>
-  <p></p>
-  <a href="magnet:?xt=urn:btih:HASH00010" target="_blank">BAIXAR</a>
-</div>
+</section>
 
-<!-- ... aqui seguiria até o 100 ... -->
+<footer>
+  &copy; Aqui estou mais um dia.
+</footer>
 
-<div class="game-box">
-  <h2>Jogo 100</h2>
-  <p></p>
-  <a href="magnet:?xt=urn:btih:HASH00100" target="_blank">BAIXAR</a>
-</div>
-<!-- FIM DOS 100 BLOCOS -->
-<!-- INÍCIO DOS 100 BLOCOS -->
-<div class="game-box">
-  <h2>Jogo 1</h2>
-  <p></p>
-  <a href="magnet:?xt=urn:btih:HASH00001" target="_blank">BAIXAR</a>
-</div>
-<div class="game-box">
-  <h2>Jogo 2</h2>
-  <p></p>
-  <a href="magnet:?xt=urn:btih:HASH00002" target="_blank">BAIXAR</a>
-</div>
-<div class="game-box">
-  <h2>Jogo 3</h2>
-  <p></p>
-  <a href="magnet:?xt=urn:btih:HASH00003" target="_blank">BAIXAR</a>
-</div>
-<div class="game-box">
-  <h2>Jogo 4</h2>
-  <p></p>
-  <a href="magnet:?xt=urn:btih:HASH00004" target="_blank">BAIXAR</a>
-</div>
-<div class="game-box">
-  <h2>Jogo 5</h2>
-  <p></p>
-  <a href="magnet:?xt=urn:btih:HASH00005" target="_blank">BAIXAR</a>
-</div>
-<div class="game-box">
-  <h2>Jogo 6</h2>
-  <p></p>
-  <a href="magnet:?xt=urn:btih:HASH00006" target="_blank">BAIXAR</a>
-</div>
-<div class="game-box">
-  <h2>Jogo 7</h2>
-  <p></p>
-  <a href="magnet:?xt=urn:btih:HASH00007" target="_blank">BAIXAR</a>
-</div>
-<div class="game-box">
-  <h2>Jogo 8</h2>
-  <p></p>
-  <a href="magnet:?xt=urn:btih:HASH00008" target="_blank">BAIXAR</a>
-</div>
-<div class="game-box">
-  <h2>Jogo 9</h2>
-  <p></p>
-  <a href="magnet:?xt=urn:btih:HASH00009" target="_blank">BAIXAR</a>
-</div>
-<div class="game-box">
-  <h2>Jogo 10</h2>
-  <p></p>
-  <a href="magnet:?xt=urn:btih:HASH00010" target="_blank">BAIXAR</a>
-</div>
+<script>
+  // Busca ativa na GameBox
+  document.getElementById('searchInput').addEventListener('input', function () {
+    const termo = this.value.toLowerCase();
+    const boxes = document.querySelectorAll('#gameBox .game-box');
 
-<!-- ... aqui seguiria até o 100 ... -->
+    boxes.forEach(box => {
+      const titulo = box.querySelector('h2')?.textContent.toLowerCase() || "";
+      box.style.display = titulo.includes(termo) ? 'block' : 'none';
+    });
+  });
+</script>
 
-<div class="game-box">
-  <h2>Jogo 100</h2>
-  <p></p>
-  <a href="magnet:?xt=urn:btih:HASH00100" target="_blank">BAIXAR</a>
-</div>
-<!-- FIM DOS 100 BLOCOS -->
-
-        </div>
-    </div>
-
-    <footer>
-      &copy; Como sempre. Kléber fazzendo merda.— 
-    </footer>
-  </div>
-
-  <script>
-    function searchItems() {
-      const input = document.getElementById('search').value.toLowerCase();
-      const games = document.querySelectorAll('.game-box');
-
-      games.forEach(game => {
-        const text = game.textContent.toLowerCase();
-        game.style.display = text.includes(input) ? 'block' : 'none';
-      });
-    }
-
-    // Busca em tempo real enquanto digita
-    document.getElementById('search').addEventListener('input', searchItems);
-  </script>
 </body>
 </html>
