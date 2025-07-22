@@ -9,11 +9,11 @@
 
   <style>
     :root {
-      --bg: #0d1117;
-      --card-bg: #161b22;
-      --highlight: #58a6ff;
-      --text: #c9d1d9;
-      --font-title: 'Orbitron', sans-serif;
+      --bg: #ececec;
+      --card-bg: #ffffff;
+      --highlight: #000000;
+      --text: #000000;
+      --font-title: 'inter', sans-serif;
       --font-body: 'Roboto', sans-serif;
     }
 
@@ -30,12 +30,12 @@
     }
 
     header {
-      background-color: #010409;
+      background-color: #ffffff;
       padding: 1rem 2rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      border-bottom: 1px solid #21262d;
+      border-bottom: 2px solid #d6d6d6;
       position: sticky;
       top: 0;
       z-index: 100;
@@ -61,20 +61,20 @@
 
     .hero {
       background: linear-gradient(to right, rgba(0,0,0,0.6), rgba(0,0,0,0.3)),
-      url('https://pixelz.cc/wp-content/uploads/2023/09/xbox-game-studios-uhd-4k-wallpaper.jpg') center/cover no-repeat;
+      url('https://wallpapercave.com/wp/wp8371718.jpg') center/cover no-repeat;
       height: 400px;
       display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 3rem;
+      align-items: left;
+      justify-content: left;
+      font-size: 5rem;
       font-family: var(--font-title);
-      color: white;
-      text-shadow: 0 0 10px black;
+      color: rgb(110, 110, 110);
+      text-shadow: 0 0 10px rgb(54, 49, 49);
     }
 
     .section-title {
       text-align: center;
-      font-size: 2rem;
+      font-size: 4rem;
       font-family: var(--font-title);
       margin: 2rem auto 1rem;
     }
@@ -155,9 +155,9 @@
       border-radius: 5px;
       font-weight: bold;
     }
-
+s
     .game-box a:hover {
-      background-color: #1f6feb;
+      background-color: #acadaf;
     }
 
     footer {
@@ -175,7 +175,7 @@
 <header>
   <h1>Klaos v2</h1>
   <nav>
-    <a href="#">Loja</a>
+    <a href="#">Surpresa</a>
     <a href="#">Biblioteca</a>
     <a href="#">Comunidade</a>
     <a href="#">Suporte</a>
@@ -183,11 +183,12 @@
 </header>
 
 <div class="hero">
-  Baixe e aproveite
+  Fallout 3
 </div>
+ 
 
 <!-- 🎮 Jogos em destaque -->
-<div class="section-title">Jogos em destaque</div>
+<div class="section-title">Nosso catálogo</div>
 <section class="games" id="gameList">
   <div class="game-card">
     <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/1091500/header.jpg" alt="Cyberpunk 2077">
@@ -209,16 +210,16 @@
 
 <!-- 🔎 Barra de busca abaixo dos destaques -->
 <div class="search-bar">
-  <input type="text" id="searchInput" placeholder="Ache teu jogo">
+  <input type="text" id="searchInput" placeholder="Ache tua game box">
 </div>
 
 <!-- 📦 GameBox fixa -->
 <div class="content">
       <div class="main" id="gameList">
         <div class="game-box">
-          <h2>Call of duty 2</h2>
-          <p>O clássico dos FPS da activision, agora no klaOS.</p>
-          <a href="magnet:?xt=urn:btih:SCPR4VDZMIXJPJN5J5ENZSEJSGXGCJT5" target="_blank">BAIXAR</a>
+          <h2>Call of duty 1 e 2 Collection</h2>
+          <p>O clássico dos FPS da activision, agora no klaOS.</p> 
+          <a href="cod-1-2_archive.torrent" target="_blank">BAIXAR</a>        
         </div>
         <div class="game-box">
           <h2>Max payne 3</h2>
@@ -379,7 +380,7 @@
   <p></p>
   <a href="magnet:?xt=urn:btih:HASH00009" target="_blank">BAIXAR</a>
 </div>
-<div class="game-box">s
+<div class="game-box">
   <h2>Mad Max Torrent</h2>
   <p></p>
   <a href="magnet:?xt=urn:btih:1f02292a28e463c31e7ca5fde724f00dc3ae9368&dn=Mad+Max+Ripper+Special+Edition+%28build+29.04.2018%29+ElAmigos" target="_blank">BAIXAR</a>
@@ -466,16 +467,16 @@
 </footer>
 
 <script>
-  // Busca ativa na GameBox
-  document.getElementById('searchInput').addEventListener('input', function () {
-    const termo = this.value.toLowerCase();
-    const boxes = document.querySelectorAll('#gameBox .game-box');
-
+ document.querySelector('input').addEventListener('input', function() {
+    const term = this.value.toLowerCase();
+    const boxes = document.querySelectorAll('.game-box');
     boxes.forEach(box => {
-      const titulo = box.querySelector('h2')?.textContent.toLowerCase() || "";
-      box.style.display = titulo.includes(termo) ? 'block' : 'none';
+        box.style.display = box.querySelector('h2').textContent.toLowerCase().includes(term) ? 'block' : 'none';
     });
-  });
+});
+
+   
+
 </script>
 
 </body>
