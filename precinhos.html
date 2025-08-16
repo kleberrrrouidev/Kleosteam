@@ -1,104 +1,89 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <title>Inicio</title>
+  <title>Kleosteam - Meu Jogo</title>
+  <link rel="stylesheet" href="/css/estilo.css"> <!-- Aproveita o CSS do site -->
   <style>
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background-color: #fff5f5;
-      color: #333;
-    }
-
-    header {
-      background-color: #b30000;
-      color: white;
-      text-align: center;
-      padding: 40px 20px;
-    }
-
-    header img {
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      border: 4px solid #fff;
-      margin-top: 10px;
-    }
-
-    main {
-      max-width: 800px;
-      margin: 30px auto;
-      padding: 0 20px;
-    }
-
-    section {
-      margin-bottom: 30px;
-    }
-
-    h2 {
-      color: #b30000;
-      border-bottom: 2px solid #b30000;
-      padding-bottom: 5px;
-    }
-
-    footer {
-      background-color: #b30000;
-      color: white;
-      text-align: center;
-      padding: 15px 10px;
-      margin-top: 40px;
-    }
-
-    @media (max-width: 600px) {
-      header img {
-        width: 90px;
-        height: 90px;
-      }
+    .game-box {
+      border: 3px solid #fff;
+      margin: 20px auto;
+      background: #000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 10px;
+      width: fit-content;
     }
   </style>
 </head>
 <body>
-
+  
+  <!-- Cabeçalho padrão do Kleosteam -->
   <header>
-    <h1>Kleberrrr.git</h1>
-    <p>Desenvolvedor Web | Entusiasta em Tecnologia</p>
-    <img src="kay.jpeg" alt="Foto de Kleberrrr.git">
+    <h1>🎮 Kleosteam - Sala de Jogos</h1>
+    <nav>
+      <a href="/">Início</a> |
+      <a href="/jogos/">Todos os Jogos</a>
+    </nav>
   </header>
 
   <main>
-    <section>
-      <h2>Sobre Mim</h2>
-      <p>Foco em criar sites com base em minhas necessidades, ou seja, pouco me importo com oque vc precisa, cirarei oque eu bem entender. bjs..</p>
-    </section>
+    <h2>🏆 Multiplayer Local + Save Offline</h2>
+    <p>Jogue aqui diretamente no navegador. Seu progresso fica salvo no seu dispositivo.</p>
 
-    <section>
-      <h2>Formação</h2>
-      <ul>
-        <li>Crie um site htlm basico, java, css</li>
-        <li>python, ia em github, azure, entre outros</li>
-      </ul>
-    </section>
-
-    <section>
-      <h2>Experiência Profissional</h2>
-      <ul>
-        <li> <a href="" target="_blank">Veja com seus olhos</a></li>
-        <li>Copiar site dos outros</li>
-      </ul>
-    </section>
-
-    <section>
-      <h2>Contato</h2>
-      <p>Email: nem eu sei</p>
-      <p>LinkedIn: linkedin.com/</p>
-    </section>
+    <!-- “Box” do jogo -->
+    <div class="game-box">
+      <canvas id="game-container" width="600" height="400"></canvas>
+    </div>
   </main>
 
-  <footer>
-    &copy; Eu faria este acordo 
-  </footer>
+  <!-- Scripts do jogo -->
+  <script src="https://unpkg.com/netplayjs@0.4.1/dist/netplay.js"></script>
+  <script>
+    // Funções de save local
+    function salvarProgresso(fase, pontos) {
+      localStorage.setItem("faseAtual", fase);
+      localStorage.setItem("pontuacao", pontos);
+    }
+    function carregarProgresso() {
+      return {
+        fase: parseInt(localStorage.getItem("faseAtual")) || 1,
+        pontos: parseInt(localStorage.getItem("pontuacao")) || 0
+      };
+    }
+
+    // Jogo simples para exemplo
+    class MeuJogo extends netplayjs.Game {
+      constructor() {
+        super();
+        let save = carregarProgresso();
+        this.pos = { x: 100, y: 100 };
+        this.fase = save.fase;
+        this.pontos = save.pontos;
+      }
+      tick(inputs) {
+        for (const [player, input] of inputs.entries()) {
+          let vel = input.arrowKeys();
+          this.pos.x += vel.x * 5;
+          this.pos.y -= vel.y * 5;
+          this.pontos++;
+          salvarProgresso(this.fase, this.pontos);
+        }
+      }
+      draw(canvas) {
+        let ctx = canvas.getContext("2d");
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = "red";
+        ctx.fillRect(this.pos.x, this.pos.y, 20, 20);
+        ctx.fillStyle = "white";
+        ctx.fillText(`Fase: ${this.fase} | Pontos: ${this.pontos}`, 10, 20);
+      }
+    }
+    MeuJogo.timestep = 1000 / 60;
+    MeuJogo.canvas = document.getElementById("game-container");
+    new netplayjs.RollbackWrapper(MeuJogo).start();
+  </script>
 
 </body>
 </html>
