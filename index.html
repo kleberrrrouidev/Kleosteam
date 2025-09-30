@@ -1,11 +1,10 @@
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Klaos</title>
-  <link rel="icon" href="https://www.google.com/imgres?q=k%20icon&imgurl=https%3A%2F%2Fimg.freepik.com%2Fvetores-premium%2Ficone-em-forma-de-seta-italica-preta-em-forma-de-letra-k_95164-8874.jpg%3Fsemt%3Dais_hybrid%26w%3D740&imgrefurl=https%3A%2F%2Fbr.freepik.com%2Ffotos-vetores-gratis%2Fk-icon&docid=vEKK5G-loI74jM&tbnid=ZwpfL6cXqsY09M&vet=12ahUKEwjGoLTFi9GOAxV0qpUCHS0JOq4QM3oECC8QAA..i&w=740&h=740&hcb=2&ved=2ahUKEwjGoLTFi9GOAxV0qpUCHS0JOq4QM3oECC8QAA" />
+  <link rel="icon" href="https://img.freepik.com/vetores-premium/icone-em-forma-de-seta-italica-preta-em-forma-de-letra-k_95164-8874.jpg" />
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Roboto&display=swap" rel="stylesheet">
 
   <style>
@@ -13,9 +12,15 @@
       --bg: #ececec;
       --card-bg: #ffffff;
       --highlight: #000000;
+      --highlight-hover: #acadaf;
       --text: #000000;
-      --font-title: 'inter', sans-serif;
-      --font-body: 'inter', sans-serif;
+      --font-title: 'Orbitron', sans-serif;
+      --font-body: 'Roboto', sans-serif;
+      --transition-speed: 0.3s;
+      --shadow-light: rgba(0,0,0,0.2);
+      --shadow-dark: rgba(0,0,0,0.5);
+      --gradient-start: #ffbb8d;
+      --gradient-end: #ff6b81;
     }
 
     * {
@@ -28,10 +33,12 @@
       background-color: var(--bg);
       color: var(--text);
       font-family: var(--font-body);
+      scroll-behavior: smooth;
     }
 
+    /* Header */
     header {
-      background-color: #ffffff;
+      background-color: var(--card-bg);
       padding: 1rem 2rem;
       display: flex;
       justify-content: space-between;
@@ -40,12 +47,16 @@
       position: sticky;
       top: 0;
       z-index: 100;
+      transition: background-color var(--transition-speed);
     }
 
     header h1 {
       font-family: var(--font-title);
       color: var(--highlight);
-      font-size: 1.8rem;
+      font-size: 2rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      cursor: pointer;
     }
 
     nav a {
@@ -53,80 +64,78 @@
       text-decoration: none;
       color: var(--text);
       font-size: 1rem;
-      transition: color 0.3s;
+      font-weight: 500;
+      position: relative;
+      transition: color var(--transition-speed);
+    }
+
+    nav a::after {
+      content: '';
+      display: block;
+      height: 2px;
+      width: 0%;
+      background: var(--highlight);
+      transition: width var(--transition-speed);
+      position: absolute;
+      bottom: -5px;
+      left: 0;
     }
 
     nav a:hover {
       color: var(--highlight);
     }
 
-    .hero {
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    /* Hero Section */
+    .hero, .hero32 {
       background: linear-gradient(to right, rgba(0,0,0,0.6), rgba(0,0,0,0.3)),
       url('https://wallpapercave.com/wp/wp3318654.jpg') center/cover no-repeat;
-      height: 450px;
+      height: 500px;
       display: flex;
-      align-items: left;
-      justify-content: left;
+      flex-direction: column;
+      justify-content: center;
+      padding-left: 5%;
       font-size: 3rem;
       font-family: var(--font-title);
       color: rgb(255, 224, 186);
       text-shadow: 0 0 10px rgb(54, 49, 49);
+      position: relative;
     }
 
-
-    .hero32 {
-      background: linear-gradient(to right, rgba(0,0,0,0.6), rgba(0,0,0,0.3)),
-      url('https://wallpapercave.com/wp/wp3318654.jpg') center/cover no-repeat;
-      height: 450px;
-      display: flex;
-      align-items: left;
-      justify-content: left;
-      font-size: 3rem;
-      font-family: var(--font-title);
-      color: rgb(255, 224, 186);
-      text-shadow: 0 0 10px rgb(54, 49, 49);
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 30%;
+      background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
     }
 
-
+    /* Section Titles */
     .section-title {
       text-align: center;
-      font-size: 4rem;
+      font-size: 3rem;
       font-family: var(--font-title);
-      margin: 2rem auto 1rem;
+      margin: 3rem auto 1.5rem;
+      color: var(--highlight);
+      position: relative;
     }
 
-    .games {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 1.5rem;
-      padding: 2rem;
-    }
-
-    .game-card {
-      background-color: var(--card-bg);
-      border-radius: 10px;
-      overflow: hidden;
-      transition: transform 0.3s;
-      box-shadow: 0 0 15px rgba(0,0,0,0.5);
-    }
-
-    .game-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 0 25px var(--highlight);
-    }
-
-    .game-card img {
-      width: 100%;
+    .section-title::after {
+      content: '';
       display: block;
+      width: 60px;
+      height: 3px;
+      background: var(--highlight);
+      margin: 0.5rem auto 0;
+      border-radius: 2px;
     }
 
-    .game-card h3 {
-      text-align: center;
-      font-family: var(--font-title);
-      padding: 1rem;
-      font-size: 1.2rem;
-    }
-
+    /* Search Bar */
     .search-bar {
       text-align: center;
       padding: 1rem;
@@ -135,74 +144,285 @@
     .search-bar input {
       width: 80%;
       max-width: 500px;
-      padding: 0.6rem;
-      border: none;
-      border-radius: 5px;
+      padding: 0.6rem 1rem;
+      border: 2px solid var(--highlight);
+      border-radius: 50px;
       font-size: 1rem;
+      transition: border var(--transition-speed);
     }
 
+    .search-bar input:focus {
+      outline: none;
+      border-color: var(--highlight-hover);
+      box-shadow: 0 0 10px var(--shadow-light);
+    }
+
+    /* Games Grid */
+    .games {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      padding: 2rem;
+    }
+
+    .game-card {
+      background-color: var(--card-bg);
+      border-radius: 15px;
+      overflow: hidden;
+      transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+      box-shadow: 0 0 10px var(--shadow-light);
+      cursor: pointer;
+      position: relative;
+    }
+
+    .game-card:hover {
+      transform: translateY(-10px) scale(1.02);
+      box-shadow: 0 0 25px var(--highlight);
+    }
+
+    .game-card img {
+      width: 100%;
+      display: block;
+      transition: transform var(--transition-speed);
+    }
+
+    .game-card:hover img {
+      transform: scale(1.05);
+    }
+
+    .game-card h3 {
+      text-align: center;
+      font-family: var(--font-title);
+      padding: 1rem;
+      font-size: 1.3rem;
+      background: linear-gradient(90deg, var(--gradient-start), var(--gradient-end));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    /* Game Box */
     .game-box {
       background-color: var(--card-bg);
-      border-radius: 10px;
-      padding: 1rem;
-      margin: 1rem auto;
+      border-radius: 15px;
+      padding: 1.5rem;
+      margin: 1.5rem auto;
       max-width: 600px;
-      box-shadow: 0 0 15px rgba(0,0,0,0.3);
+      box-shadow: 0 0 20px var(--shadow-dark);
+      transition: transform var(--transition-speed);
+    }
+
+    .game-box:hover {
+      transform: translateY(-5px);
     }
 
     .game-box h2 {
       font-family: var(--font-title);
-      font-size: 1.5rem;
+      font-size: 1.7rem;
       margin-bottom: 0.5rem;
       color: var(--highlight);
     }
 
     .game-box p {
       font-size: 1rem;
-      margin-bottom: 1rem;
+      margin-bottom: 1.5rem;
+      line-height: 1.6;
+      color: #333;
     }
 
     .game-box a {
       display: inline-block;
-      padding: 0.5rem 1rem;
+      padding: 0.6rem 1.5rem;
       background-color: var(--highlight);
       color: white;
       text-decoration: none;
-      border-radius: 5px;
+      border-radius: 8px;
       font-weight: bold;
+      transition: background-color var(--transition-speed), transform var(--transition-speed);
     }
-s
+
     .game-box a:hover {
-      background-color: #acadaf;
+      background-color: var(--highlight-hover);
+      transform: scale(1.05);
     }
-    
-   .secao-azul {
-   background-color: #ffffff;
-   color: #696969;
-   padding: 20px;
-  }
 
-  .secao-branca {
-   background-color: #ffbb8d;
-   color: #333;
-   padding: 20px;
-  }
+    /* Colored Sections */
+    .secao-azul {
+      background-color: #f0f8ff;
+      color: #333;
+      padding: 40px 20px;
+      text-align: center;
+    }
 
+    .secao-azul h2 {
+      margin-bottom: 1rem;
+      font-size: 2.5rem;
+      font-family: var(--font-title);
+      color: #000;
+    }
 
+    .secao-branca {
+      background-color: #ffbb8d;
+      color: #333;
+      padding: 40px 20px;
+      text-align: center;
+    }
 
+    .secao-branca h2 {
+      margin-bottom: 1rem;
+      font-size: 2.5rem;
+      font-family: var(--font-title);
+      color: #000;
+    }
+
+    /* Footer */
     footer {
       background-color: #010409;
       text-align: center;
-      padding: 1rem;
-      margin-top: 2rem;
+      padding: 2rem 1rem;
+      margin-top: 3rem;
       font-size: 0.9rem;
       color: #8b949e;
+      position: relative;
+      overflow: hidden;
     }
+
+    footer::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -50%;
+      width: 200%;
+      height: 2px;
+      background: linear-gradient(to right, transparent, #8b949e, transparent);
+      animation: footerLine 3s linear infinite;
+    }
+
+    @keyframes footerLine {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* Animations */
+    .fade-in {
+      opacity: 0;
+      animation: fadeIn 1.2s forwards;
+    }
+
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+
+    /* Carrossel */
+    .carousel {
+      position: relative;
+      width: 90%;
+      margin: 2rem auto;
+      overflow: hidden;
+      border-radius: 15px;
+      box-shadow: 0 0 20px var(--shadow-dark);
+    }
+
+    .carousel-track {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+    }
+
+    .carousel-item {
+      min-width: 250px;
+      margin-right: 1rem;
+      border-radius: 10px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform var(--transition-speed);
+    }
+
+    .carousel-item:hover {
+      transform: scale(1.05);
+    }
+
+    .carousel-controls {
+      position: absolute;
+      top: 50%;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      transform: translateY(-50%);
+      padding: 0 1rem;
+    }
+
+    .carousel-controls button {
+      background-color: var(--highlight);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
+      font-size: 1.2rem;
+      transition: background-color var(--transition-speed);
+    }
+
+    .carousel-controls button:hover {
+      background-color: var(--highlight-hover);
+    }
+
+    /* Responsividade */
+    @media(max-width: 768px) {
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      nav {
+        margin-top: 1rem;
+      }
+
+      .hero, .hero32 {
+        font-size: 2rem;
+        padding-left: 3%;
+        height: 400px;
+      }
+
+      .section-title {
+        font-size: 2.2rem;
+      }
+
+      .games {
+        gap: 1rem;
+        padding: 1rem;
+      }
+
+      .game-card h3 {
+        font-size: 1rem;
+      }
+    }
+
+    @media(max-width: 480px) {
+      .search-bar input {
+        width: 95%;
+      }
+
+      .carousel-item {
+        min-width: 200px;
+      }
+
+      .hero, .hero32 {
+        font-size: 1.8rem;
+        height: 350px;
+      }
+    }
+
   </style>
 </head>
 <body>
-
-<header>
+  <header>
+    <h1>Klaos</h1>
+    <nav>
+      <a href="#games">Jogos</a>
+      <a href="#novidades">Novidades</a>
+      <a href="#contato">Contato</a>
+    </nav>
+  </header>
   <h1>Klaoos</h1>
   <nav>
     <a href="https://technical.city/pt/system-requirements/far-cry-3">Seu pc irá rodar?</a>
