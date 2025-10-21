@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emulador NES Online</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #1a1a1a;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        header {
+            background-color: #111;
+            width: 100%;
+            text-align: center;
+            padding: 20px;
+            font-size: 2rem;
+            color: #f39c12;
+        }
+        #game {
+            width: 100%;
+            max-width: 640px;
+            height: 480px;
+            margin: 20px 0;
+            border: 3px solid #f39c12;
+            background-color: black;
+        }
+        #gameList {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 50px;
+        }
+        .game {
+            width: 120px;
+            cursor: pointer;
+            text-align: center;
+            transition: transform 0.2s;
+        }
+        .game img {
+            width: 100%;
+            border-radius: 5px;
+            border: 2px solid #333;
+        }
+        .game:hover {
+            transform: scale(1.05);
+        }
+        .game p {
+            margin: 5px 0 0 0;
+            font-size: 0.9rem;
+            color: #f0f0f0;
+        }
+    </style>
+</head>
+<body>
+    <header>Emulador NES Online</header>
+
+    <div id="game"></div>
+
+    <section id="gameList">
+        <div class="game" onclick="loadGame('https://jsnes-online.github.io/roms/SuperMarioBros.nes.zip')">
+            <img src="https://upload.wikimedia.org/wikipedia/en/0/03/Super_Mario_Bros._box.png" alt="Super Mario Bros">
+            <p>Super Mario Bros</p>
+        </div>
+        <div class="game" onclick="loadGame('https://jsnes-online.github.io/roms/LegendOfZelda.nes.zip')">
+            <img src="https://upload.wikimedia.org/wikipedia/en/e/e7/Legend_of_Zelda_NES_box_art.png" alt="The Legend of Zelda">
+            <p>The Legend of Zelda</p>
+        </div>
+        <div class="game" onclick="loadGame('https://jsnes-online.github.io/roms/MegaMan.nes.zip')">
+            <img src="https://upload.wikimedia.org/wikipedia/en/2/25/Mega_Man_NES_box_art.png" alt="Mega Man">
+            <p>Mega Man</p>
+        </div>
+    </section>
+
+    <script>
+        var EJS_player = "#game";
+        var EJS_core = "nes";
+        var EJS_pathtodata = "https://cdn.emulatorjs.org/stable/data/";
+        var EJS_gameUrl = ""; // será carregado dinamicamente
+
+        function loadGame(url) {
+            EJS_gameUrl = url;
+            // Remove e recarrega o loader
+            var script = document.createElement("script");
+            script.src = "https://cdn.emulatorjs.org/stable/data/loader.js";
+            document.body.appendChild(script);
+        }
+    </script>
+</body>
+</html>
