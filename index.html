@@ -469,7 +469,7 @@
           <p>O clássico dos FPS da activision, agora no klaOS.</p> 
           <a href="cod-1-2_archive.torrent" target="_blank">BAIXAR</a>        
         </div>
-         
+         <div id="game-box"></div>
         <div class="game-box">
           <h2>SPEC OF THE HUGO</h2>
           <p>Clique no arquivo apos baixar</p>
@@ -748,7 +748,36 @@
     });
 });
 
-   
+   <script>
+  // Função que carrega as game boxes do localStorage (salvas pelo admin.html)
+  function carregarGameBoxes() {
+    const container = document.getElementById('games-container');
+    container.innerHTML = ''; // limpa antes de gerar
+
+    const games = JSON.parse(localStorage.getItem('gameBoxes') || '[]');
+
+    if (games.length === 0) {
+      container.innerHTML = '<p style="text-align:center;opacity:0.7;">Nenhum jogo adicionado ainda.</p>';
+      return;
+    }
+
+    games.forEach(game => {
+      const box = document.createElement('div');
+      box.className = 'game-box';
+
+      box.innerHTML = `
+        <h2>${game.nome}</h2>
+        <p>${game.descricao || 'Sem descrição disponível.'}</p>
+        <a href="${game.link}" target="_blank">Acessar</a>
+      `;
+
+      container.appendChild(box);
+    });
+  }
+
+  // Executa a função quando a página carrega
+  document.addEventListener('DOMContentLoaded', carregarGameBoxes);
+</script>
 
 </script>
 
