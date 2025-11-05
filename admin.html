@@ -1,0 +1,155 @@
+<!DOCTYPE html><html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Painel Admin - Game Boxes</title>
+  <style>
+    body {
+      background: #0f1724;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      background: #1e293b;
+      padding: 20px;
+      border-radius: 10px;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+    input, textarea {
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      background: #0b1220;
+      color: #fff;
+    }
+    button {
+      padding: 10px;
+      background: #00bcd4;
+      border: none;
+      color: #000;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    button:hover {
+      background: #02c9df;
+    }
+    #lista {
+      margin-top: 30px;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+      display: grid;
+      gap: 15px;
+    }
+    .item {
+      background: #0b1220;
+      padding: 15px;
+      border-radius: 8px;
+    }
+    .item h3 {
+      margin: 0;
+    }
+    .item img {
+      width: 100%;
+      border-radius: 8px;
+      margin-top: 10px;
+    }
+    .actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 10px;
+    }
+    .actions button {
+      background: #ff5252;
+      color: #fff;
+    }
+    .actions button.edit {
+      background: #2196f3;
+    }
+  </style>
+</head>
+<body>
+  <h1>Painel de Administração - Game Boxes</h1>
+  <form id="form">
+    <input type="text" id="nome" placeholder="Nome do jogo" required>
+    <input type="text" id="link" placeholder="Link do jogo" required>
+    <input type="text" id="imagem" placeholder="URL da imagem (opcional)">
+    <textarea id="descricao" placeholder="Descrição"></textarea>
+    <button type="submit">Salvar</button>
+  </form>  <div id="lista"></div>  <script>
+    const form = document.getElementById('form');
+    const lista = document.getElementById('lista');
+    let editIndex = null;
+
+    function carregar() {
+      const dados = JSON.parse(localStorage.getItem('gameBoxes') || '[]');
+      lista.innerHTML = '';
+      dados.forEach((game, i) => {
+        const div = document.createElement('div');
+        div.className = 'item';
+        div.innerHTML = `
+          <h3>${game.nome}</h3>
+          ${game.imagem ? `<img src="${game.imagem}" alt="${game.nome}">` : ''}
+          <p>${game.descricao}</p>
+          <a href="${game.link}" target="_blank">${game.link}</a>
+          <div class="actions">
+            <button class="edit" onclick="editar(${i})">Editar</button>
+            <button onclick="remover(${i})">Remover</button>
+          </div>
+        `;
+        lista.appendChild(div);
+      });
+    }
+
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      const nome = document.getElementById('nome').value.trim();
+      const link = document.getElementById('link').value.trim();
+      const imagem = document.getElementById('imagem').value.trim();
+      const descricao = document.getElementById('descricao').value.trim();
+
+      let dados = JSON.parse(localStorage.getItem('gameBoxes') || '[]');
+
+      if (editIndex !== null) {
+        dados[editIndex] = { nome, link, imagem, descricao };
+        editIndex = null;
+      } else {
+        dados.push({ nome, link, imagem, descricao });
+      }
+
+      localStorage.setItem('gameBoxes', JSON.stringify(dados));
+      form.reset();
+      carregar();
+    });
+
+    function editar(i) {
+      const dados = JSON.parse(localStorage.getItem('gameBoxes') || '[]');
+      const game = dados[i];
+      document.getElementById('nome').value = game.nome;
+      document.getElementById('link').value = game.link;
+      document.getElementById('imagem').value = game.imagem;
+      document.getElementById('descricao').value = game.descricao;
+      editIndex = i;
+    }
+
+    function remover(i) {
+      let dados = JSON.parse(localStorage.getItem('gameBoxes') || '[]');
+      dados.splice(i, 1);
+      localStorage.setItem('gameBoxes', JSON.stringify(dados));
+      carregar();
+    }
+
+    carregar();
+  </script></body>
+</html>
