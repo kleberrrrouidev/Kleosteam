@@ -1,785 +1,325 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Klaos</title>
-  <link rel="icon" href="https://img.freepik.com/vetores-premium/icone-em-forma-de-seta-italica-preta-em-forma-de-letra-k_95164-8874.jpg" />
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Roboto&display=swap" rel="stylesheet">
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KLEblioteca</title>
   <style>
-    :root {
-      --bg: #ececec;
-      --card-bg: #ffffff;
-      --highlight: #000000;
-      --highlight-hover: #acadaf;
-      --text: #000000;
-      --font-title: 'Orbitron', sans-serif;
-      --font-body: 'Roboto', sans-serif;
-      --transition-speed: 0.3s;
-      --shadow-light: rgba(0,0,0,0.2);
-      --shadow-dark: rgba(0,0,0,0.5);
-      --gradient-start: #ffbb8d;
-      --gradient-end: #ff6b81;
-    }
+    * * 
+ * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Comic Sans MS', 'Poppins', cursive, sans-serif;
+}
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+body {
+  background: repeating-linear-gradient(
+    45deg,
+    #ffcc00 0px,
+    #ffcc00 12px,
+    #ffffff 12px,
+    #ffffff 24px
+  );
+  color: #333;
+}
 
-    body {
-      background-color: var(--bg);
-      color: var(--text);
-      font-family: var(--font-body);
-      scroll-behavior: smooth;
-    }
+/* NAV */
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 30px;
+  background: #ff3b3b;
+  box-shadow: 0 5px 0 #000;
+}
 
-    /* Header */
-    header {
-      background-color: var(--card-bg);
-      padding: 1rem 2rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 2px solid #d6d6d6;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      transition: background-color var(--transition-speed);
-    }
+nav h2 {
+  color: #fff;
+}
 
-    header h1 {
-      font-family: var(--font-title);
-      color: var(--highlight);
-      font-size: 2rem;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      cursor: pointer;
-    }
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
 
-    nav a {
-      margin-left: 2rem;
-      text-decoration: none;
-      color: var(--text);
-      font-size: 1rem;
-      font-weight: 500;
-      position: relative;
-      transition: color var(--transition-speed);
-    }
+nav a {
+  text-decoration: none;
+  color: #ffee00;
+  font-weight: bold;
+  transition: 0.2s;
+}
 
-    nav a::after {
-      content: '';
-      display: block;
-      height: 2px;
-      width: 0%;
-      background: var(--highlight);
-      transition: width var(--transition-speed);
-      position: absolute;
-      bottom: -5px;
-      left: 0;
-    }
+nav a:hover {
+  transform: scale(1.1);
+}
 
-    nav a:hover {
-      color: var(--highlight);
-    }
+/* HEADER */
+header {
+  text-align: center;
+  padding: 40px 20px;
+}
 
-    nav a:hover::after {
-      width: 100%;
-    }
+header h1 {
+  font-size: 34px;
+  text-shadow: 2px 2px 0 #fff, 4px 4px 0 #000;
+}
 
-    /* Hero Section */
-    .hero, .hero32 {
-      background: linear-gradient(to right, rgba(0,0,0,0.6), rgba(0,0,0,0.3)),
-      url('https://wallpapercave.com/wp/wp3318654.jpg') center/cover no-repeat;
-      height: 500px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding-left: 5%;
-      font-size: 3rem;
-      font-family: var(--font-title);
-      color: rgb(255, 224, 186);
-      text-shadow: 0 0 10px rgb(54, 49, 49);
-      position: relative;
-    }
+/* SEARCH */
+.search-bar {
+  max-width: 400px;
+  margin: 20px auto;
+}
 
-    .hero::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      height: 30%;
-      background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
-    }
+.search-bar input {
+  width: 100%;
+  padding: 12px;
+  border-radius: 20px;
+  border: 3px solid #000;
+  outline: none;
+}
 
-    /* Section Titles */
-    .section-title {
-      text-align: center;
-      font-size: 3rem;
-      font-family: var(--font-title);
-      margin: 3rem auto 1.5rem;
-      color: var(--highlight);
-      position: relative;
-    }
+/* GRID */
+.container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  padding: 30px;
+}
 
-    .section-title::after {
-      content: '';
-      display: block;
-      width: 60px;
-      height: 3px;
-      background: var(--highlight);
-      margin: 0.5rem auto 0;
-      border-radius: 2px;
-    }
+/* GAME BOX */
+.game-box {
+  background-color: #fff;
+  background-image: radial-gradient(#000 1px, transparent 1px);
+  background-size: 12px 12px;
+  border-radius: 20px;
+  padding: 20px;
+  text-align: center;
+  border: 3px solid #000;
+  box-shadow: 6px 6px 0 #000;
+  transition: 0.2s;
+}
 
-    /* Search Bar */
-    .search-bar {
-      text-align: center;
-      padding: 1rem;
-    }
+.game-box:hover {
+  transform: translate(-5px, -5px);
+  box-shadow: 10px 10px 0 #000;
+}
 
-    .search-bar input {
-      width: 80%;
-      max-width: 500px;
-      padding: 0.6rem 1rem;
-      border: 2px solid var(--highlight);
-      border-radius: 50px;
-      font-size: 1rem;
-      transition: border var(--transition-speed);
-    }
+.game-box h3 {
+  margin-bottom: 15px;
+}
 
-    .search-bar input:focus {
-      outline: none;
-      border-color: var(--highlight-hover);
-      box-shadow: 0 0 10px var(--shadow-light);
-    }
+/* BUTTON */
+.download-btn {
+  display: inline-block;
+  padding: 10px 18px;
+  border-radius: 20px;
+  background: #fdf900;
+  color: #000000;
+  text-decoration: none;
+  font-weight: bold;
+  border: 3px solid #000;
+  box-shadow: 3px 3px 0 #000;
+  transition: 0.2s;
+}
 
-    /* Games Grid */
-    .games {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 2rem;
-      padding: 2rem;
-    }
+.download-btn:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 5px 5px 0 #000;
+}
 
-    .game-card {
-      background-color: var(--card-bg);
-      border-radius: 15px;
-      overflow: hidden;
-      transition: transform var(--transition-speed), box-shadow var(--transition-speed);
-      box-shadow: 0 0 10px var(--shadow-light);
-      cursor: pointer;
-      position: relative;
-    }
+/* CONTACT */
+.contact input,
+.contact textarea {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 15px;
+  border: 3px solid #000;
+}
 
-    .game-card:hover {
-      transform: translateY(-10px) scale(1.02);
-      box-shadow: 0 0 25px var(--highlight);
-    }
+.contact button {
+  padding: 10px 20px;
+  border-radius: 20px;
+  border: 3px solid #000;
+  background: #ffcc00;
+  cursor: pointer;
+  font-weight: bold;
+  box-shadow: 3px 3px 0 #000;
+}
 
-    .game-card img {
-      width: 100%;
-      display: block;
-      transition: transform var(--transition-speed);
-    }
+.recommendations {
+  max-width: 900px;
+  margin: 20px auto;
+  position: relative;
+}
 
-    .game-card:hover img {
-      transform: scale(1.05);
-    }
+.rec-card {
+  display: none;
+  align-items: center;
+  gap: 20px;
+  background: #fff;
+  border: 3px solid #000;
+  border-radius: 20px;
+  padding: 20px;
+  box-shadow: 6px 6px 0 #000;
+}
 
-    .game-card h3 {
-      text-align: center;
-      font-family: var(--font-title);
-      padding: 1rem;
-      font-size: 1.3rem;
-      background: linear-gradient(90deg, var(--gradient-start), var(--gradient-end));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
+.rec-card.active {
+  display: flex;
+}
 
-    /* Game Box */
-    .game-box {
-      background-color: var(--card-bg);
-      border-radius: 15px;
-      padding: 1.5rem;
-      margin: 1.5rem auto;
-      max-width: 600px;
-      box-shadow: 0 0 20px var(--shadow-dark);
-      transition: transform var(--transition-speed);
-    }
+/* imagem */
+.rec-card img {
+  width: 120px;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 2px solid #000;
+}
 
-    .game-box:hover {
-      transform: translateY(-5px);
-    }
+/* texto */
+.rec-info h2 {
+  margin-bottom: 10px;
+}
 
-    .game-box h2 {
-      font-family: var(--font-title);
-      font-size: 1.7rem;
-      margin-bottom: 0.5rem;
-      color: var(--highlight);
-    }
+.rec-info p {
+  font-size: 14px;
+}
 
-    .game-box p {
-      font-size: 1rem;
-      margin-bottom: 1.5rem;
-      line-height: 1.6;
-      color: #333;
-    }
+/* 📱 mobile */
+@media (max-width: 600px) {
+  .rec-card {
+    flex-direction: column;
+    text-align: center;
+  }
 
-    .game-box a {
-      display: inline-block;
-      padding: 0.6rem 1.5rem;
-      background-color: var(--highlight);
-      color: white;
-      text-decoration: none;
-      border-radius: 8px;
-      font-weight: bold;
-      transition: background-color var(--transition-speed), transform var(--transition-speed);
-    }
+  .rec-card img {
+    width: 100px;
+    height: 140px;
+  }
+}
 
-    .game-box a:hover {
-      background-color: var(--highlight-hover);
-      transform: scale(1.05);
-    }
 
-    /* Colored Sections */
-    .secao-azul {
-      background-color: #f0f8ff;
-      color: #333;
-      padding: 40px 20px;
-      text-align: center;
-    }
-
-    .secao-azul h2 {
-      margin-bottom: 1rem;
-      font-size: 2.5rem;
-      font-family: var(--font-title);
-      color: #000;
-    }
-
-    .secao-branca {
-      background-color: #ffbb8d;
-      color: #333;
-      padding: 40px 20px;
-      text-align: center;
-    }
-
-    .secao-branca h2 {
-      margin-bottom: 1rem;
-      font-size: 2.5rem;
-      font-family: var(--font-title);
-      color: #000;
-    }
-
-    /* Footer */
-    footer {
-      background-color: #010409;
-      text-align: center;
-      padding: 2rem 1rem;
-      margin-top: 3rem;
-      font-size: 0.9rem;
-      color: #8b949e;
-      position: relative;
-      overflow: hidden;
-    }
-
-    footer::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -50%;
-      width: 200%;
-      height: 2px;
-      background: linear-gradient(to right, transparent, #8b949e, transparent);
-      animation: footerLine 3s linear infinite;
-    }
-
-    @keyframes footerLine {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(-50%); }
-    }
-
-    /* Animations */
-    .fade-in {
-      opacity: 0;
-      animation: fadeIn 1.2s forwards;
-    }
-
-    @keyframes fadeIn {
-      to { opacity: 1; }
-    }
-
-    /* Carrossel */
-    .carousel {
-      position: relative;
-      width: 90%;
-      margin: 2rem auto;
-      overflow: hidden;
-      border-radius: 15px;
-      box-shadow: 0 0 20px var(--shadow-dark);
-    }
-
-    .carousel-track {
-      display: flex;
-      transition: transform 0.5s ease-in-out;
-    }
-
-    .carousel-item {
-      min-width: 250px;
-      margin-right: 1rem;
-      border-radius: 10px;
-      overflow: hidden;
-      cursor: pointer;
-      transition: transform var(--transition-speed);
-    }
-
-    .carousel-item:hover {
-      transform: scale(1.05);
-    }
-
-    .carousel-controls {
-      position: absolute;
-      top: 50%;
-      width: 100%;
-      display: flex;
-      justify-content: space-between;
-      transform: translateY(-50%);
-      padding: 0 1rem;
-    }
-
-    .carousel-controls button {
-      background-color: var(--highlight);
-      color: white;
-      border: none;
-      border-radius: 50%;
-      width: 40px;
-      height: 40px;
-      cursor: pointer;
-      font-size: 1.2rem;
-      transition: background-color var(--transition-speed);
-    }
-
-    .carousel-controls button:hover {
-      background-color: var(--highlight-hover);
-    }
-
-    /* Responsividade */
-    @media(max-width: 768px) {
-      header {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
-      nav {
-        margin-top: 1rem;
-      }
-
-      .hero, .hero32 {
-        font-size: 2rem;
-        padding-left: 3%;
-        height: 400px;
-      }
-
-      .section-title {
-        font-size: 2.2rem;
-      }
-
-      .games {
-        gap: 1rem;
-        padding: 1rem;
-      }
-
-      .game-card h3 {
-        font-size: 1rem;
-      }
-    }
-
-    @media(max-width: 480px) {
-      .search-bar input {
-        width: 95%;
-      }
-
-      .carousel-item {
-        min-width: 200px;
-      }
-
-      .hero, .hero32 {
-        font-size: 1.8rem;
-        height: 350px;
-      }
-    }
-
+/* FOOTER */
+footer {
+  text-align: center;
+  padding: 20px;
+  font-weight: bold;
+}
   </style>
 </head>
 <body>
-  <header>
-   
-  <h1>Klaoos</h1>
-  <nav>
-    <a href="https://technical.city/pt/system-requirements/far-cry-3">Seu pc irá rodar?</a>
-    <a href="admin.html">Biblioteca</a>
-    <a href="precinhos.html">Comunidade</a>
-    <a href="#">Suporte</a>
-  </nav>
+ <nav>
+  <h2>📚 KLEBERteca</h2>
+  <ul>
+    <li><a href="https://kleberrrrouidev.github.io/Kleosteam/ ">jogos</a></li>
+    <li><a href="mangas.html">Quadrinhos e mangas</a></li>
+    <li><a href="https://github.com/kleberrrrouidev">Contato</a></li>
+  </ul>
+</nav>
+
+<header id="livros">
+  <h1>Bookstation</h1>
+  <div class="search-bar">
+    <input type="text" id="search" placeholder="Buscar livro..." onkeyup="searchBooks()">
+  </div>
 </header>
 
-<div class="hero">
- Spec of the line
-</div>
- 
-<div class="secao-azul">
-<!-- 🎮 Jogos em destaque -->
-<div class="section-title">Nosso catálogo</div>
-<section class="games" id="gameList">
-  <div class="game-card">
-    <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/1091500/header.jpg" alt="Cyberpunk 2077">
-    <h3>Cyberpunk 2077</h3>
+<div class="recommendations">
+  <div class="rec-card active">
+    <img src="img cas.jpg">
+    <div class="rec-info">
+      <h2>Crime e Castigo</h2>
+      <p>Um jovem atormentado comete um crime e enfrenta um intenso conflito psicológico sobre culpa e moral.</p>
+    </div>
   </div>
+
+  <div class="rec-card">
+    <img src="h.jpg">
+    <div class="rec-info">
+      <h2>O Hobbit</h2>
+      <p>Bilbo Bolseiro embarca em uma aventura inesperada cheia de perigos, dragões e tesouros.</p>
+    </div>
+  </div>
+
+  <div class="rec-card">
+    <img src="1999.jpg">
+    <div class="rec-info">
+      <h2>1984</h2>
+      <p>Uma sociedade controlada por um governo totalitário onde tudo é vigiado.</p>
+    </div>
+  </div>
+</div>
   
-  <div class="game-card">
-    <img src="l.a2.jpeg" alt="GTA V">
-    <h3>l.a noire</h3>
-  </div>
-  <div class="game-card">
-    <img src="cs.c.jpeg" alt="Apex Legends">
-    <h3>CS Cource</h3>
-  </div>
-  <div class="game-card">
-    <img src="red.jpg" alt="Counter-Strike 2">
-    <h3>Red dead</h3>
-  </div>
-</section>
+<div class="container" id="booksContainer">
 
-
-
-<div class="secao-branca">
-<!-- 🔎 Barra de busca abaixo dos destaques -->
-<div class="search-bar">
-  <input type="text" id="searchInput" placeholder="Ache tua game box">
+  <!-- LIVROS -->
+  <div class="game-box"><h3>Quadrinhos Marvel</h3><a href="linkj.htm" class="download-btn">Download</a></div>
+  <div class="game-box"><h3>Dom Casmurro</h3><a href="dom-casmurro.pdf" class="download-btn">Download</a></div>
+  <div class="game-box"><h3>O Pequeno Príncipe</h3><a href="o_pequeno_principe_-_antoine_de_saint-exupery_1.pdf" class="download-btn">Download</a></div>
+  <div class="game-box"><h3>1984</h3><a href="1984.pdf" class="download-btn">Download</a></div>
+  <div class="game-box"><h3>Orgulho e Preconceito</h3><a href="ORGULHO-E-PRECONCEITO-Austen-Jane.pdf" class="download-btn">Download</a></div>
+  <div class="game-box"><h3>A Revolução dos Bichos</h3><a href="ardb.pdf" class="download-btn">Download</a></div>
+  <div class="game-box"><h3>O Hobbit</h3><a href="O-Hobbit-J.R.R.-Tolkien.pdf" class="download-btn">Download</a></div>
+  <div class="game-box"><h3>Harry Potter e a Pedra Filosofal</h3><a href="j.k._rowling_-_1_-_harry_potter_e_a_pedra_filosofal.pdf" class="download-btn">Download</a></div>
+  <div class="game-box"><h3>O Senhor dos Anéis</h3><a href="osrda.pdf" class="download-btn">Download</a></div>
+  <div class="game-box"><h3>O Código Da Vinci</h3><a href="ocdd.pdf" class="download-btn">Download</a></div>
+  <div class="game-box"><h3>Crepúsculo</h3><a href="crp.pdf" class="download-btn">Download</a></div>
+  <div class="game-box"><h3>Jogos Vorazes</h3><a href="jgz.pdf" class="download-btn">Download</a></div>
+  <div class="game-box"><h3>It: A Coisa</h3><a href="it.pdf" class="download-btn">Download</a></div>
+  <div class="game-box"><h3>O Iluminado</h3><a href="oilu.pdf" class="download-btn">Download</a></div>
+  <div class="game-box"><h3>Drácula</h3><a href="dra.pdf" class="download-btn">Download</a></div>
+  <div class="game-box"><h3>Frankenstein</h3><a href="Frankenstein - Mary Shelley.pdf" class="download-btn">Download</a></div>
+   <div class="game-box"><h3>Os Miseráveis</h3><a href="Os Miseraveis - Victor Hugo.pdf class="download-btn">Download</a></div>
+<div class="game-box"><h3>O Conde de Monte C1risto</h3><a href="O-Conde-de-Monte-Cristo-Alexandre-Dumas-1_compressed1.pdf" class="download-btn">Download</a></div>
+<div class="game-box"><h3>A Metamorfose</h3><a href="A-metamorfose-978-65-89008-23-1.pdf" class="download-btn">Download</a></div>
+<div class="game-box"><h3>O Processo</h3><a href="O Processo - Franz Kafka.pdf" class="download-btn">Download</a></div>
+<div class="game-box"><h3>Admirável Mundo Novo</h3><a href="admiravel-mundo-novo.pdf" class="download-btn">Download</a></div>
+<div class="game-box"><h3>Fahrenheit 451</h3><a href="fahrenheit-451-ray-bradbury.pdf" class="download-btn">Download</a></div>
+<div class="game-box"><h3>O Apanhador no Campo de Centeio</h3><a href="J_D_Salinger-O_Apanhador_no_Campo_de_Centeio.pdf" class="download-btn">Download</a></div>
+<div class="game-box"><h3>As Crônicas de Nárnia</h3><a href="c.s._lewis_-_as_cr__nicas_de_n__rnia__volume_unico_.pdf class="download-btn">Download</a></div>
+<div class="game-box"><h3>Percy Jackson e o Ladrão de Raios</h3><a href="percy-jackson-e-os-olimpianos_-o-ladrao-de-raios-vol-1-rick-riordan.pdf class=class="download-btn">Download</a></div>
+<div class="game-box"><h3>A Menina que Roubava Livros</h3><a href="a-menina-que-roubava-livros.pdf" class="download-btn">Download</a></div>
+<div class="game-box"><h3>O Alquimista</h3><a href="paulo coelho - o alquimista.pdf" class="download-btn">Download</a></div>
+<div class="game-box"><h3>Ensaio sobre a Cegueira</h3><a href="ensaio-sobre-a-cegueira1.pdf" class="download-btn">Download</a></div>
+<div class="game-box"><h3>crime e castigo</h3><a href="dostoievski-crime-e-castigo.pdf" class="download-btn">Download</a></div>
+<div class="game-box"><h3>Capitães da Areia</h3><a href="capitaes-da-areia.pdf" class="download-btn">Download</a></div>
+<div class="game-box"><h3>O Nome do Vento</h3><a href="O Nome do Vento PDF.pdf" class="download-btn">Download</a></div>
+<div class="game-box"><h3>Os Irmãos Karamazov</h3><a href="dostoievski-fiodor-os-irmaos-karamazov-completo.pdf" class="download-btn">Download</a></div>
 </div>
-
-<!-- 📦 GameBox fixa -->
-<div class="content">
-      <div class="main" id="gameList">
-        <div class="game-box">
-          <h2>Call of duty 1 e 2 Collection</h2>
-          <p>O clássico dos FPS da activision, agora no klaOS.</p> 
-          <a href="cod-1-2_archive.torrent" target="_blank">BAIXAR</a>        
-        </div>
-         <div id="game-box"></div>
-        <div class="game-box">
-          <h2>SPEC OF THE HUGO</h2>
-          <p>Clique no arquivo apos baixar</p>
-          <p>Via internet srchive, clique em torrent</p>
-          <a href="https://archive.org/details/spec-ops-the-line_202402" target="blank_">Aqui</a>
-        </div>
-
-        <div class="game-box">
-          <h2>CALL OF DUTY MW</h2>
-          <a href="https://archive.org/download/cod-4_202502/cod-4_202502_archive.torrent" target="blank_">aqui</a>
-          <p>Se não funcionar baixe e o mova para pasta do jogo este arquivo, ou entre em contato</p>
-          <a href=" https://archive.org/download/cod4-mw-cdpatch/CoD4MW_CDPatch.zip" target="_blank">aqui</a>
-        </div>
-        <div class="game-box">
-          <h2>Call of duty 2 </h2>
-          <p>Desta vez a só</p>
-          <a href="magnet:?xt=urn:btih:SCPR4VDZMIXJPJN5J5ENZSEJSGXGCJT5&dn=Cal2lo2fD2uty2EA-elamigos&tr=http%3A%2F%2F1337.abcvg.info%3A80%2Fannounce" target="_blank">BAIXAR</a>
-        </div>
-        <div class="game-box">
-          <h2>Max payne 3</h2>
-          <p>Max in brazil!</p>
-          <a href="magnet:?xt=urn:btih:5d4172becde6361997e482edba5d60ad28c15f6e" target="_blank">BAIXAR</a>
-        </div>
-        <div class="game-box">
-          <h2>Fallout 3</h2>
-          <p>RPG que lembra .....</p>
-          <a href="magnet:?xt=urn:btih:d3cd3513a7d953e21be929be4fae24bcd98e2a2d" target="_blank">BAIXAR</a>
-        </div>
-        <div class="game-box">
-          <h2>Fallout New Vegas</h2>
-          <p>Continuação de um clássico</p>
-          <a href="magnet:?xt=urn:btih:AB17BE3C8B7FA88B3AF13E9C4FF7200B98525F3C" target="_blank">BAIXAR</a>
-        </div>
-        <div class="game-box">
-          <h2>Sleeping Dogs</h2>
-          <p>Um "GTA clone" muito foda</p>
-          <a href="magnet:?xt=urn:btih:6d27396746370b3b316ef0efc7867d1b26a8d415" target="_blank">BAIXAR</a>
-        </div>
-        <div class="game-box">
-          <h2>The Amazing Spider Man 2</h2>
-          <p>Este jogo do spider roda em qualquer PC, totalmente em pt/br</p>
-          <a href="magnet:?xt=urn:btih:B4CA44AFB0AD39AA86FD5EA25FFCBF80C8D36E1A" target="_blank">BAIXAR</a>
-        </div>
-        <div class="game-box">
-          <h2>Bully</h2>
-          <p>Um clássico da Rockstar em português</p>
-          <a href="magnet:?xt=urn:btih:EKD4VS47KKAVP3HVELCUC6HTMLYUA3MY" target="_blank">BAIXAR</a>
-        </div>
-        <div class="game-box">
-          <h2>Dead Island</h2>
-          <p>Leve e zumbiiiiii</p>
-          <a href="magnet:?xt=urn:btih:AR7ZYPOY6IQOF7MX2TQXRBAOHSIA7BGY" target="_blank">BAIXAR</a>
-        </div>
-         
-         <div class="game-box">
-            <h2>Far cry 3</h2>
-            <p>GOAT da ubi n tem como</p>
-            <a href="magnet:?xt=urn:btih:fb2241a0875ec890fa30d1806eca98ab455911f3&dn=Far+Cry+3+Complete+Collection+MULTi13-ElAmigos.iso" target="_blank">BAIXAR</a>
-         </div>
-        
-         <div class="game-box">
-            <h2>Assasins creed</h2>
-            <p>outro classico ubi</p>
-            <a href="magnet:?xt=urn:btih:124129b830fe2efcfe39e6c3993fe08a2e62f165&dn=Assassin%27s+Creed+-+Director%27s+Cut+1.02+ElAmigos" target="_blank">BAIXAR</a>
-         </div>
-          
-         <div class="game-box">
-            <h2>Just cause 2</h2>
-            <p>Ja joguei e é mt fd</p>
-            <a href=" magnet:?xt=urn:btih:C17EBC904B2BFD24F7E9A5B9646A7D6A507F9162&dn=Just.Cause.2.MULTi7.incl.6.DLC.iso&tr=udp%3a%2f%2fopen.demonii.com%3a1337%2fannounce&tr=udp%3a%2f%2ftracker.publicbt.com%3a80%2fannounce&tr=udp%3a%2f%2ftracker.openbittorrent.com%3a80%2fannounce&tr=udp%3a%2f%2ftracker.istole.it%3a80%2fannounce" target="_blank">BAIXAR</a>
-         </div>
-           <!-- INÍCIO DOS 100 BLOCOS -->
-<div class="game-box">
-  <h2> Battlefild 1</h2>
-  <p>Tiro massaaa</p>
-  <a href="magnet:?xt=urn:btih:69c624162b16099c949a2365f9907915c2ac9016" target="_blank">BAIXAR</a>
-</div>
-<div class="game-box">
-  <h2>The Elder Scrolls V Skyrim</h2>
-  <p>Rpg fodaaaaaaa</p>
-  <a href="magnet:?xt=urn:btih:e740ea83d04aef83a4ed687fb20b1136fe74c5b4" target="_blank">BAIXAR</a>
-</div>
-<div class="game-box">
-  <h2>POSTAL 4 No Regert</h2>
-  <p></p>
-  <a href="magnet:?xt=urn:btih:45MBJCA6UG3IQD5F76PO4H7LOBEKMDVM" target="_blank">BAIXAR</a>
-</div>
-<div class="game-box">
-  <h2>Battlefield Bad Company 2</h2>
-  <p></p>
-  <a href="magnet:?xt=urn:btih:8586DACEDA26CC7C8E6F3B8D286BDB3061928D8A" target="_blank">BAIXAR</a>
-</div>
-<div class="game-box">
-  <h2>Batman: Arkham Asylum</h2>
-  <p></p>
-  <a href="magnet:?xt=urn:btih:1D63A03E8DED008A8879D14769E016E9708D6357" target="_blank">BAIXAR</a>
-</div>
-<div class="game-box">
-  <h2>Batman: Arkham City </h2>
-  <p></p>
-  <a href="magnet:?xt=urn:btih:5ED7B8C5BD33B593D3011E3249A64B0F2400980F" target="_blank">BAIXAR</a>
-</div>
-<div class="game-box">
-  <h2>Batman: Arkham Origins</h2>
-  <p></p>
-  <a href="magnet:?xt=urn:btih:3F8458000998E856A6DEBD0B4767AAEFC945013F" target="_blank">BAIXAR</a>
-</div>
-<div class="game-box">
-  <h2>Batman: Arkham Knight </h2>
-  <p>gays</p>
-  <a href="magnet:?xt=urn:btih:bc3c6a84c76f883946239309e0735bd22acecce1" target="_blank">BAIXAR</a>
-</div>
-<div class="game-box">
-  <h2>GTA San Andreas</h2>
-  <p></p>
-  <a href="magnet:?xt=urn:btih:6abb5be16784ee66dd2f1dbd5cb86730464974e0" target="_blank">BAIXAR</a>
-</div>
-<div class="game-box">
-  <h2>Battlefield 3</h2>
-  <p></p>
-  <a href="magnet:?xt=urn:btih:D3B30CC64D410112DF4BC515AC12438E17D82852" target="_blank">BAIXAR</a>
-</div>
-
-<!-- ... aqui seguiria até o 100 ... -->
-
-<div class="game-box">
-  <h2>Need for Speed Most Wanted </h2>
-  <p></p>
-  <a href="magnet:?xt=urn:btih:2d1b072a7d55102d080010c13f04e542d8cf5eae&dn=Need.for.Speed.Most.Wanted.Black.Edition.Repack-R.G.%D0%9C%D0%B5chanics&tr=udp%3A%2F%2Ftracker.openbittorrent.com%3A80&tr=udp%3A%2F%2Fopen.demonii.com%3A1337&tr=udp%3A%2F%2Ftracker.coppersurfer.tk%3A6969&tr=udp%3A%2F%2Fexodus.desync.com%3A6969" target="_blank">BAIXAR</a>
-</div>
-<!-- FIM DOS 100 BLOCOS -->
-<!-- INÍCIO DOS 100 BLOCOS -->
-<div class="game-box">
-  <h2>Sniper Elite 3</h2>
-  <p></p>
-  <a href="magnet:?xt=urn:btih:PUIG67DWFXI5JWFJSAJ2YT7GVO552ODR&dn=Sniper.Elite.3.MULTi13-PLAZA&tr=udp%3A%2F%2Ftracker.opentrackr.org%3A1337%2Fannounce" target="_blank">BAIXAR</a>
-</div>
-<div class="game-box">
-  <h2>Kingdom Come Deliverance</h2>
-  <p></p>
-  <a href="mmagnet:?xt=urn:btih:MTI5LOGCKGZ7JLHLFIKVXFH3OBKWZMPJ&dn=Kingdom_Come_Deliverance_1.9.6-404-504czj3_(62297)_win_gog&tr=udp%3A%2F%2Ftracker.openbittorrent.com%3A80%2Fannounce" target="_blank">BAIXAR</a>
-</div>
-<div class="game-box">
-  <h2>Assassin’s Creed IV Black Flag</h2>
-  <p></p>
-  <a href="magnet:?xt=urn:btih:LHISKMF2L4NCXTIFKACDTQ3557WRZLIN" target="_blank">BAIXAR</a>
-</div>
-<div class="game-box">
-  <h2>Devil May Cry 5</h2>
-  <p></p>
-  <a href="magnet:?xt=urn:btih:beb80710c71b69c8e4de942ba7e344c0c0f8cbb0" target="_blank">BAIXAR</a>
-</div>
-<div class="game-box">
-  <h2>Watch Dogs</h2>
-  <p></p>
-  <a href="magnet:?xt=urn:btih:4IHE465VSDN73G42SCMBTBVUW2B5N5EC" target="_blank">BAIXAR</a>
-</div>
-<div class="game-box">
-  <h2>DELTARUNE</h2>
-  <p></p>
-  <a href="https://www.mediafire.com/file/yk2mm4gsqlfum91" target="_blank">BAIXAR</a>
-</div>
-<div class="game-box">
-  <h2>Teenage Mutant Ninja Turtles Splintered Fate</h2>
-  <p></p>
-  <a href="magnet:?xt=urn:btih:A8E8DC809B9582067845F0CD2FF574F95933B892&dn=Teenage+Mutant+Ninja+Turtles+Splintered+Fate-TENOKE&tr=udp%3A%2F%2Ftracker.torrent.eu.org%3A451%2Fannounce&tr=udp%3A%2F%2Fexodus.desync.com%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.moeking.me%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.opentrackr.org%3A1337%2Fannounce&tr=udp%3A%2F%2Fopen.stealth.si%3A80%2Fannounce&tr=udp%3A%2F%2Ftracker.theoks.net%3A6969%2Fannounce&tr=udp%3A%2F%2Fmovies.zsw.ca%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker-udp.gbitt.info%3A80%2Fannounce&tr=udp%3A%2F%2Ftracker.tiny-vps.com%3A6969%2Fannounce&tr=http%3A%2F%2Ftracker.gbitt.info%3A80%2Fannounce&tr=http%3A%2F%2Ftracker.ccp.ovh%3A6969%2Fannounce&tr=https%3A%2F%2Ftracker.gbitt.info%3A443%2Fannounce&tr=udp%3A%2F%2Ftracker.dler.com%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.ccp.ovh%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.opentrackr.org%3A1337%2Fannounce&tr=http%3A%2F%2Ftracker.openbittorrent.com%3A80%2Fannounce&tr=udp%3A%2F%2Fopentracker.i2p.rocks%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.internetwarriors.net%3A1337%2Fannounce&tr=udp%3A%2F%2Ftracker.leechers-paradise.org%3A6969%2Fannounce&tr=udp%3A%2F%2Fcoppersurfer.tk%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.zer0day.to%3A1337%2Fannounce" target="_blank">BAIXAR</a>
-</div>
-<div class="game-box">
-  <h2>NINJA GAIDEN 2 Black 8</h2>
-  <p></p>
-  <a href="magnet:?xt=urn:btih:AA5F5C3DDA006B9D4EA47910156B970A3A7365E3&dn=Ninja+Gaiden+2+Black+%28v1.0.5.0+%2B+MULTi8%29+%5BDODI+Repack%5D&tr=udp%3A%2F%2F9.rarbg.to%3A2870%2Fannounce&tr=udp%3A%2F%2Feddie4.nl%3A6969%2Fannounce&tr=udp%3A%2F%2Fthetracker.org%3A80%2Fannounce&tr=udp%3A%2F%2Ftracker.coppersurfer.tk%3A6969&tr=udp%3A%2F%2Ftracker.leechers-paradise.org%3A6969&tr=udp%3A%2F%2Ftracker.opentrackr.org%3A1337&tr=udp%3A%2F%2Ftracker.zer0day.to%3A1337&tr=udp%3A%2F%2F9.rarbg.com%3A2710%2Fannounce&tr=udp%3A%2F%2Fexplodie.org%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker1.wasabii.com.tw%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.torrent.eu.org%3A451%2Fannounce&tr=udp%3A%2F%2Ftracker.cypherpunks.ru%3A6969%2Fannounce&tr=udp%3A%2F%2Fp4p.arenabg.com%3A1337%2Fannounce&tr=udp%3A%2F%2Ftracker.opentrackr.org%3A1337%2Fannounce&tr=http%3A%2F%2Ftracker.openbittorrent.com%3A80%2Fannounce&tr=udp%3A%2F%2Fopentracker.i2p.rocks%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.internetwarriors.net%3A1337%2Fannounce&tr=udp%3A%2F%2Ftracker.leechers-paradise.org%3A6969%2Fannounce&tr=udp%3A%2F%2Fcoppersurfer.tk%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.zer0day.to%3A1337%2Fannounce" target="_blank">BAIXAR</a>
-</div>
-<div class="game-box">
-  <h2>Jogo 9</h2>
-  <p></p>
-  <a href="magnet:?xt=urn:btih:HASH00009" target="_blank">BAIXAR</a>
-</div>
-<div class="game-box">
-  <h2>Mad Max Torrent</h2>
-  <p></p>
-  <a href="magnet:?xt=urn:btih:1f02292a28e463c31e7ca5fde724f00dc3ae9368&dn=Mad+Max+Ripper+Special+Edition+%28build+29.04.2018%29+ElAmigos" target="_blank">BAIXAR</a>
-</div>
-
-<!-- ... aqui seguiria até o 100 ... -->
-
-<div class="game-box">
-  <h2>Metal Gear Solid V</h2>
-  <p></p>
-  <a href="magnet:?xt=urn:btih:62EEQIZYGL2KTHEY3TU4IZ5DG6YKZ322&dn=Metal.Gear.Solid.V.The.Phantom.Pain-CPY&tr=http%3A%2F%2Ftracker.trackerfix.com%3A80%2Fannounce" target="_blank">BAIXAR</a>
-</div>
-<!-- FIM DOS 100 BLOCOS -->
-<!-- INÍCIO DOS 100 BLOCOS -->
-<div class="game-box">
-  <h2>Outlast 2 Torrent</h2>
-  <p></p>
-  <a href="magnet:?xt=urn:btih:1aaa2810563933b7d3b9bf5e1e0dd5a1ae38fa79&dn=Outlast+2-CODEX&tr=udp%3A%2F%2Ftracker.leechers-paradise.org%3A6969&tr=udp%3A%2F%2Fzer0day.ch%3A1337&tr=udp%3A%2F%2Fopen.demonii.com%3A1337&tr=udp%3A%2F%2Ftracker.coppersurfer.tk%3A6969&tr=udp%3A%2F%2Fexodus.desync.com%3A69691" target="_blank">BAIXAR</a>
-</div>
-<div class="game-box">
-  <h2>Dead Space </h2>
-  <p></p>
-  <a href="magnet:?xt=urn:btih:8ca6511ec67a054537900e6c8155b05305903a65&dn=Dead+Space" target="_blank">BAIXAR</a>
-</div>
-<div class="game-box">
-  <h2>Counter Strike Source</h2>
-  <p></p>
-  <a href="magnet:?xt=urn:btih:EA7BB580C57590FFE615263DC9DED03681866AB6&dn=Counter-Strike+Source+v6630498+Full+%2BAutoUpdate+%2BMultilanguage&tr=udp%3A%2F%2Ftracker.coppersurfer.tk%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.openbittorrent.com%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.opentrackr.org%3A1337&tr=udp%3A%2F%2Ftracker.leechers-paradise.org%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.dler.org%3A6969%2Fannounce&tr=udp%3A%2F%2Fopentracker.i2p.rocks%3A6969%2Fannounce&tr=udp%3A%2F%2F47.ip-51-68-199.eu%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.internetwarriors.net%3A1337%2Fannounce&tr=udp%3A%2F%2F9.rarbg.to%3A2920%2Fannounce&tr=udp%3A%2F%2Ftracker.pirateparty.gr%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.cyberia.is%3A6969%2Fannounce" target="_blank">BAIXAR</a>
-</div>
-<div class="game-box">
-  <h2>Crysis 2</h2>
-  <p></p>
-  <a href="magnet:?xt=urn:btih:L6NDQLOROUEJ4WOBAAX7X4ACXYBJOL3Z" target="_blank">BAIXAR</a>
-</div>
-<div class="game-box">
-  <h2>Call of duty black ops 2</h2>
-  <p></p>
-  <a href="magnet:?xt=urn:btih:8D824729948DD3FFF906CD70F4E3D806A7AB8FD4&dn=Call+of+Duty%3A+Black+Ops+2+%28%2B36+DLCs+%2B+MP+with+Bots+%2B+Zombie+Mode%2C+MULTi7%29+%5BFitGirl+Repack%2C+Selective+Download+-+from+8.4+GB%5D&tr=udp%3A%2F%2F9.rarbg.to%3A2710%2Fannounce&tr=udp%3A%2F%2Feddie4.nl%3A6969%2Fannounce&tr=udp%3A%2F%2Fshadowshq.yi.org%3A6969%2Fannounce&tr=udp%3A%2F%2Fthetracker.org%3A80%2Fannounce&tr=udp%3A%2F%2Ftracker.coppersurfer.tk%3A6969&tr=udp%3A%2F%2Ftracker.leechers-paradise.org%3A6969&tr=udp%3A%2F%2Ftracker.opentrackr.org%3A1337&tr=udp%3A%2F%2Ftracker.piratepublic.com%3A1337%2Fannounce&tr=udp%3A%2F%2Ftracker.zer0day.to%3A1337&tr=udp%3A%2F%2F9.rarbg.com%3A2710%2Fannounce&tr=udp%3A%2F%2Fexplodie.org%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker1.wasabii.com.tw%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.torrent.eu.org%3A451%2Fannounce&tr=udp%3A%2F%2Ftracker.cypherpunks.ru%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.opentrackr.org%3A1337%2Fannounce&tr=http%3A%2F%2Ftracker.openbittorrent.com%3A80%2Fannounce&tr=udp%3A%2F%2Fopentracker.i2p.rocks%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.internetwarriors.net%3A1337%2Fannounce&tr=udp%3A%2F%2Ftracker.leechers-paradise.org%3A6969%2Fannounce&tr=udp%3A%2F%2Fcoppersurfer.tk%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.zer0day.to%3A1337%2Fannounce" target="_blank">BAIXAR</a>
-</div>
-<div class="game-box">
-  <h2>Bayonetta 2</h2>
-  <p></p>
-  <a href="magnet:?xt=urn:btih:B697A22048FE8C94430A4304541268D84C0301A4&dn=Bayonetta%202%20%28CEmu%201.11.3%29&tr=udp%3a%2f%2fshubt.net%3a2710&tr=http%3a%2f%2fretracker.local%2fannounce&tr=http%3a%2f%2ftracker.filetracker.pl%3a8089%2fannounce&tr=http%3a%2f%2ftracker2.wasabii.com.tw%3a6969%2fannounce&tr=http%3a%2f%2ftracker.grepler.com%3a6969%2fannounce&tr=http%3a%2f%2f125.227.35.196%3a6969%2fannounce&tr=http%3a%2f%2ftracker.tiny-vps.com%3a6969%2fannounce&tr=http%3a%2f%2f87.248.186.252%3a8080%2fannounce&tr=http%3a%2f%2f210.244.71.25%3a6969%2fannounce&tr=http%3a%2f%2f46.4.109.148%3a6969%2fannounce&tr=udp%3a%2f%2f46.148.18.250%3a2710&tr=http%3a%2f%2ftracker.dler.org%3a6969%2fannounce&tr=udp%3a%2f%2f%5b2001%3a67c%3a28f8%3a92%3a%3a1111%3a1%5d%3a2710&tr=udp%3a%2f%2fipv6.leechers-paradise.org%3a6969&tr=udp%3a%2f%2f9.rarbg.com%3a2780%2fannounce&tr=http%3a%2f%2fannounce.torrentsmd.com%3a6969%2fannounce&tr=http%3a%2f%2fbt.careland.com.cn%3a6969%2fannounce&tr=udp%3a%2f%2fexplodie.org%3a6969%2fannounce&tr=http%3a%2f%2fmgtracker.org%3a2710%2fannounce&tr=http%3a%2f%2ftracker.tfile.me%2fannounce&tr=http%3a%2f%2ftracker.torrenty.org%3a6969%2fannounce&tr=udp%3a%2f%2ftracker.trackerfix.com%3a82%2fannounce&tr=http%3a%2f%2fwww.mvgroup.org%3a2710%2fannounce&tr=udp%3a%2f%2f9.rarbg.com%3a2780%2fannounce&tr=udp%3a%2f%2f9.rarbg.me%3a2800%2fannounce&tr=udp%3a%2f%2f9.rarbg.to%3a2780%2fannounce&tr=udp%3a%2f%2fcoppersurfer.tk%3a6969%2fannounce&tr=udp%3a%2f%2fexodus.desync.com%3a6969%2fannounce&tr=http%3a%2f%2fglotorrents.pw%3a80%2fannounce&tr=udp%3a%2f%2fopen.demonii.com%3a1337%2fannounce&tr=udp%3a%2f%2ftracker.coppersurfer.tk%3a6969%2fannounce&tr=udp%3a%2f%2ftracker.glotorrents.com%3a6969%2fannounce&tr=udp%3a%2f%2ftracker.leechers-paradise.org%3a6969%2fannounce&tr=udp%3a%2f%2ftracker.openbittorrent.com%3a80%2fannounce&tr=udp%3a%2f%2ftracker.opentrackr.org%3a1337%2fannounce&tr=udp%3a%2f%2ftracker.publicbt.com%3a80%2fannounce&tr=udp%3a%2f%2ftracker4.piratux.com%3a6969%2fannounce&tr=udp%3a%2f%2fpublic.popcorn-tracker.org%3a6969%2fannounce" target="_blank">BAIXAR</a>
-</div>
-<div class="game-box">
-  <h2>Metal Gear Rising Revengeance</h2>
-  <p></p>
-  <a href="magnet:?xt=urn:btih:BBMKJJVI7DRH7LGSQMBL37FRGG3656V7&dn=Metal%20Gear%20Rising%20Revengeance%20(incl.%20Update%202)&tr=udp%3A%2F%2Fshubt.net%3A2710" target="_blank">BAIXAR</a>
-</div>
-<div class="game-box">
-  <h2>Tomb Raider T</h2>
-  <p></p>
-  <a href="magnet:?xt=urn:btih:6Z6VZ3TI3LNAWD5AGDTBXWCLZU5LFLRR&dn=Tomb%20Raider%20GOTY%20Edition%20-%20%5BDODI%20Repack%5D&tr=udp%3A%2F%2Ftracker.coppersurfer.tk%3A80%2Fannounce" target="_blank">BAIXAR</a>
-</div>
-<div class="game-box">
-  <h2>Bayonetta 1 </h2>
-  <p></p>
-  <a href="magnet:?xt=urn:btih:11A2DAFF06E57F93400B89FBD1AFDCAA91576F3B&dn=Bayonetta%20Digital%20Deluxe%20Edition&tr=udp%3a%2f%2f9.rarbg.com%3a2770%2fannounce&tr=http%3a%2f%2fannounce.torrentsmd.com%3a6969%2fannounce&tr=http%3a%2f%2fbt.careland.com.cn%3a6969%2fannounce&tr=udp%3a%2f%2fexplodie.org%3a6969%2fannounce&tr=http%3a%2f%2fmgtracker.org%3a2710%2fannounce&tr=http%3a%2f%2ftracker.tfile.me%2fannounce&tr=http%3a%2f%2ftracker.torrenty.org%3a6969%2fannounce&tr=udp%3a%2f%2ftracker.trackerfix.com%3a80%2fannounce&tr=http%3a%2f%2fwww.mvgroup.org%3a2710%2fannounce&tr=udp%3a%2f%2f9.rarbg.com%3a2770%2fannounce&tr=udp%3a%2f%2f9.rarbg.me%3a2790%2fannounce&tr=udp%3a%2f%2f9.rarbg.to%3a2750%2fannounce&tr=udp%3a%2f%2fcoppersurfer.tk%3a6969%2fannounce&tr=udp%3a%2f%2fexodus.desync.com%3a6969%2fannounce&tr=http%3a%2f%2fglotorrents.pw%3a80%2fannounce&tr=udp%3a%2f%2fopen.demonii.com%3a1337%2fannounce&tr=udp%3a%2f%2ftracker.coppersurfer.tk%3a6969%2fannounce&tr=udp%3a%2f%2ftracker.glotorrents.com%3a6969%2fannounce&tr=udp%3a%2f%2ftracker.leechers-paradise.org%3a6969%2fannounce&tr=udp%3a%2f%2ftracker.openbittorrent.com%3a80%2fannounce&tr=udp%3a%2f%2ftracker.opentrackr.org%3a1337%2fannounce&tr=udp%3a%2f%2ftracker.publicbt.com%3a80%2fannounce&tr=udp%3a%2f%2ftracker4.piratux.com%3a6969%2fannounce" target="_blank">BAIXAR</a>
-</div>
-<div class="game-box">
-  <h2>Metal Slug Collection</h2>
-  <p>Quase todos da franquia</p>
-  <a href="magnet:?xt=urn:btih:928ae2121363566a7eecce7f2b344fe2fb2a0ac5" target="_blank">BAIXAR</a>
-</div>
-
-<!-- ... aqui seguiria até o 100 ... -->
-
-<div class="game-box">
-  <h2>Resident Evil 4</h2>
-  <p></p>
-  <a href="magnet:?xt=urn:btih:QNXW7Y5GUUDHLRIHRHW2YPREJV2XPKJ4&dn=Resident.Evil.4.Ultimate.HD.Edition.elamigos-games.com&tr=udp%3A%2F%2Fpublic.popcorn-tracker.org%3A6969%2Fannounce" target="_blank">BAIXAR</a>
-</div>
-<!-- FIM DOS 100 BLOCOS -->
-<!-- INÍCIO DOS 100 BLOCOS -->
-<div class="game-box">
-  <h2>L.A. Noire </h2>
-  <p></p>
-  <a href="magnet:?xt=urn:btih:TPICHVYRBOFSTAXVPFT6R7VRM6YX3WCT&dn=L.A..Noire.The.Complete.Edition.elamigos-games.com&tr=udp%3A%2F%2Fpublic.popcorn-tracker.org%3A6969%2Fannounce" target="_blank">BAIXAR</a>
-</div>
-  <div class="game-box">
-  <h2>Cyberpunk</h2>
-  <p></p>
-  <a href="magnet:?xt=urn:btih:A81F44DB938E364D1655F72816BF6404E4DE16EA&dn=Cyberpunk+2077%3A+Ultimate+Edition+%28v2.2+%2B+All+DLCs+%2B+Dev+Tools+%2B+Bonus+Content+%2B+MULTi19%29+%28From+61+GB%29+%5BDODI+Repack%5D&tr=udp%3A%2F%2F9.rarbg.to%3A2870%2Fannounce&tr=udp%3A%2F%2Feddie4.nl%3A6969%2Fannounce&tr=udp%3A%2F%2Fthetracker.org%3A80%2Fannounce&tr=udp%3A%2F%2Ftracker.coppersurfer.tk%3A6969&tr=udp%3A%2F%2Ftracker.leechers-paradise.org%3A6969&tr=udp%3A%2F%2Ftracker.opentrackr.org%3A1337&tr=udp%3A%2F%2Ftracker.zer0day.to%3A1337&tr=udp%3A%2F%2F9.rarbg.com%3A2710%2Fannounce&tr=udp%3A%2F%2Fexplodie.org%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker1.wasabii.com.tw%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.torrent.eu.org%3A451%2Fannounce&tr=udp%3A%2F%2Ftracker.cypherpunks.ru%3A6969%2Fannounce&tr=udp%3A%2F%2Fp4p.arenabg.com%3A1337%2Fannounce&tr=udp%3A%2F%2Ftracker.opentrackr.org%3A1337%2Fannounce&tr=http%3A%2F%2Ftracker.openbittorrent.com%3A80%2Fannounce&tr=udp%3A%2F%2Fopentracker.i2p.rocks%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.internetwarriors.net%3A1337%2Fannounce&tr=udp%3A%2F%2Ftracker.leechers-paradise.org%3A6969%2Fannounce&tr=udp%3A%2F%2Fcoppersurfer.tk%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.zer0day.to%3A1337%2Fannounce" target="_blank">BAIXAR</a>
-</div>
-      </div>
-</section>
-
 <footer>
-  &copy; Aqui estou mais um dia.
+  <p>© Feito por Kleber, sem fins lucrativos.</p>
 </footer>
 
 <script>
- document.querySelector('input').addEventListener('input', function() {
-    const term = this.value.toLowerCase();
-    const boxes = document.querySelectorAll('.game-box');
-    boxes.forEach(box => {
-        box.style.display = box.querySelector('h2').textContent.toLowerCase().includes(term) ? 'block' : 'none';
-    });
-});
-</script>
-   <script>
-  // Função que carrega as game boxes do localStorage (salvas pelo admin.html)
-  function carregarGameBox() {
-    const container = document.getElementById('game-box');
-    container.innerHTML = ''; // limpa antes de gerar
+// 🔍 busca
+function searchBooks() {
+  let input = document.getElementById('search').value.toLowerCase();
+  let boxes = document.getElementsByClassName('game-box');
 
-    const games = JSON.parse(localStorage.getItem('gameBox') || '[]');
+  for (let i = 0; i < boxes.length; i++) {
+    let title = boxes[i].innerText.toLowerCase();
+    boxes[i].style.display = title.includes(input) ? "block" : "none";
+  }
+}
 
-    if (game.length === 0) {
-      container.innerHTML = '<p style="text-align:center;opacity:0.7;">Nenhum jogo adicionado ainda.</p>';
-      return;
-    }
+// 🎯 slider de recomendações
+document.addEventListener("DOMContentLoaded", function () {
+  let index = 0;
+  const cards = document.querySelectorAll(".rec-card");
 
-    game.forEach(game => {
-      const box = document.createElement('div');
-      box.className = 'game-box';
-
-      box.innerHTML = `
-        <h2>${game.nome}</h2>
-        <p>${game.descricao || 'Sem descrição disponível.'}</p>
-        <a href="${game.link}" target="_blank">Acessar</a>
-      `;
-
-      container.appendChild(box);
-    });
+  function rotateCards() {
+    cards[index].classList.remove("active");
+    index = (index + 1) % cards.length;
+    cards[index].classList.add("active");
   }
 
-  // Executa a função quando a página carrega
-  document.addEventListener('DOMContentLoaded', carregarGameBoxe);
+  setInterval(rotateCards, 5000);
+});
 </script>
-
-
+</script>
 
 </body>
 </html>
